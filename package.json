@@ -1,0 +1,19 @@
+{
+  "name": "greeting-card-project",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Galia-A/greeting-card-project.git"
+  },
+  "author": "Galia Appel",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Galia-A/greeting-card-project/issues"
+  },
+  "homepage": "https://github.com/Galia-A/greeting-card-project#readme"
+}
