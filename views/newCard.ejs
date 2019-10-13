@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>New Card</title>
+  </head>
+  <body>
+    New card!!
+
+    <form action="/cards" method="post">
+      <h2>פרטי בעל.ת השמחה</h2>
+      <label for="forname">שם </label>
+      <input type="text" name="card[forname]" id="forname" />
+      <label for="relation">דרגת הקירבה</label>
+      <input type="text" name="card[relation]" id="relation" />
+      <label for="gender">מין</label>
+      <input type="text" name="card[gender]" id="gender" />
+      <label for="partyType">סוג האירוע</label>
+      <input type="text" name="card[partyType]" id="partyType" />
+      <label for="age">גיל</label>
+      <input type="text" name="card[age]" id="age" />
+      <label for="interests">תחומי עניין</label>
+      <input type="text" name="card[interests]" id="interests" />
+      <label for="style">אופי</label>
+      <input type="text" name="card[style]" id="style" />
+      <label for="senderName">שמך (המאחל.ת)</label>
+      <input type="text" name="card[senderName]" id="senderName" />
+      <button type="submit">Go!!</button>
+    </form>
+  </body>
+</html>

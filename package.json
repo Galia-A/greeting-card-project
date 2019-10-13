@@ -15,5 +15,12 @@
   "bugs": {
     "url": "https://github.com/Galia-A/greeting-card-project/issues"
   },
-  "homepage": "https://github.com/Galia-A/greeting-card-project#readme"
+  "homepage": "https://github.com/Galia-A/greeting-card-project#readme",
+  "dependencies": {
+    "ejs": "^2.7.1",
+    "express": "^4.17.1",
+    "html2canvas": "^1.0.0-rc.5",
+    "method-override": "^3.0.0",
+    "mongoose": "^5.7.4"
+  }
 }
