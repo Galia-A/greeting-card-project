@@ -4,20 +4,22 @@ const mongoose = mongooseConnect.getMongoose();
 
 // card Schema(s)
 let cardSchema = new mongoose.Schema({
-  cardId: Number, //need?
-  recipient: String,
-  gender: String, //change to "dear"
+  cardId: Number, //save in user db //???
+  recipientDescription: String, //חתול
+  gender: String,
+  genderDescription: String, //gender + style > היקר/ה, השולט/ת
   eventType: String,
+  eventDescription: String, //first random line + style? > מזל טוב ליום הולדת! יום הולדת שמח!
   style: String,
-  interests: [String],
-  senderName: String,
-  senderPlural: Boolean, //change to מאחלים
-  picUrl: String,
+  interests: [String], // for pic
+  senderNameDescription: String,
+  senderPluralDescription: String, //change to מאחלים
+  picUrl: String, //event type + interests > random from lists
   cssStyle: String, //need?
-  userId: mongoose.Schema.Types.ObjectId
-  //line1:String,
-  //line2:String,
-  //finalCardPicUrl:String
+  userId: mongoose.Schema.Types.ObjectId,
+  line1Description: String,
+  line2Description: String,
+  finalCardPicUrl: String
 });
 let Card = mongoose.model("Card", cardSchema);
 
@@ -42,17 +44,21 @@ function addNewCard(
   cardId
 ) {
   let newCard = new Card({
-    recipient: recipient,
+    recipientDescription: recipientDescription,
     gender: gender,
+    genderDescription: genderDescription,
     eventType: eventType,
+    eventDescription: eventDescription,
     style: style,
     interests: interests,
-    senderName: senderName,
-    senderPlural: senderPlural,
+    senderNameDescription: senderNameDescription,
+    senderPluralDescription: senderPluralDescription,
     picUrl: picUrl,
-    userId: userId,
     cssStyle: cssStyle,
-    cardId: cardId
+    userId: userId,
+    line1Description: line1Description,
+    line2Description: line2Description,
+    finalCardPicUrl: finalCardPicUrl
   });
   newCard.save((err, result) => {
     if (err) {
@@ -63,29 +69,45 @@ function addNewCard(
     }
   });
 }
+function updateFinalImgUrl(cardId, url) {
+  Card.findByIdAndUpdate(
+    cardId,
+    {
+      finalCardPicUrl: url
+    },
+    (err, card) => {
+      if (err) {
+        console.log("update final img url error: ", err);
+      } else {
+        console.log("update final img url success! ");
+      }
+    }
+  );
+}
 
 module.exports = {
   getOneCard: getOneCard,
-  addNewCard: addNewCard
-  // getAllPosts: getAllPosts,
-  // getOnePost: getOnePost,
-  // updatePost: updatePost,
-  // deletePost: deletePost,
-  // addNewComment: addNewComment
+  addNewCard: addNewCard,
+  updateFinalImgUrl: updateFinalImgUrl
 };
 
-//demo card
+//-- demo card --//
 // let newCard = new Card({
-//   recipient: "חתול",
+//   recipientDescription: "חתול",
 //   gender: "male",
+//   genderDescription: "היקר",
 //   eventType: "birthday",
+//   eventDescription: "מזל טוב ליום הולדתך!",
 //   style: "classic",
-//   interests: "cat",
-//   senderName: "גלי ובן",
-//   senderPlural: true,
+//   interests: ["cat"],
+//   senderNameDescription: "גלי ובן",
+//   senderPluralDescription: "מאחלים",
 //   picUrl: "https://live.staticflickr.com/7475/16113593846_4b113741fc_b.jpg",
 //   userId: mongoose.Types.ObjectId(),
 //   cssStyle: "border1",
+//   line1Description: "שפע עכברים ומחילות",
+//   line2Description: "שנהיה יחד בכל הלילות!",
+//   finalCardPicUrl: "",
 //   cardId: 1
 // });
 // newCard.save((err, result) => {

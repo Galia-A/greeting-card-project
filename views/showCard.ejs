@@ -39,7 +39,6 @@
         font-size: 24px;
         line-height: 2;
         width: 400px;
-        /* border: 1px black solid; */
       }
       .text1 .firstLine {
         font-weight: bold;
@@ -86,23 +85,21 @@
         <div class="cardDiv  <%- cardData.cssStyle %>">
           <div class="text1">
             <div class="firstLine">
-              <%= cardData.recipient %> <% if (cardData.gender === "male") { %>
-              <%= descriptive %>, <% }%>
+              <%= cardData.recipientDescription %> <%=
+              cardData.genderDescription %>,
             </div>
             <div class="msg">
-              <%= line1 %>
+              <%= cardData.eventDescription %> <%= cardData.line1Description %>
               <br />
-              <%= line2 %>
+              <%= cardData.line2Description %>
             </div>
             <div class="lastLine">
-              <%= plural %> <%= cardData.senderName %>
+              <%= cardData.senderPluralDescription %> <%=
+              cardData.senderNameDescription %>
             </div>
           </div>
           <div class="imgStyle">
-            <img
-              src="https://live.staticflickr.com/7475/16113593846_4b113741fc_b.jpg"
-              alt="happybirthday"
-            />
+            <img src= <%= cardData.picUrl %> alt= <%= cardData.eventType %> />
           </div>
         </div>
         <div class="btns">

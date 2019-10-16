@@ -16,16 +16,12 @@ function router(app) {
     .post("/cards", (req, res) => {
       let card = req.body.card;
 
-      res.redirect("/cards/3");
+      res.redirect("/cards/5da78a7f049476535803390c");
     })
     //show generated card
     .get("/cards/:id", async (req, res) => {
       let params = {
-        cardData: await cardsData.getOneCard("5da73e9e9c41fd5a20672585"),
-        descriptive: "היקר",
-        line1: "ttttמזל טוב ליום הולדתך!",
-        line2: "ttttשפע עכברים ומחילות!",
-        plural: "מאחלים"
+        cardData: await cardsData.getOneCard("5da78a7f049476535803390c")
       };
       // console.log("bur, ", params);
 
@@ -34,9 +30,10 @@ function router(app) {
     .post("/cards/:id", async (req, res) => {
       let imgUrl = req.body.imgUrl;
       let cardId = req.params.id;
+      console.log("in update img url");
 
-      //add to db
-      //cardsData.
+      //update db
+      cardsData.updateFinalImgUrl(cardId, imgUrl);
     });
 
   //register
