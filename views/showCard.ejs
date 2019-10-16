@@ -83,16 +83,19 @@
   <body>
     <div id="wrapper">
       <div class="container">
-        <div class="cardDiv border1">
+        <div class="cardDiv  <%- cardData.cssStyle %>">
           <div class="text1">
-            <div class="firstLine">חתול היקר,</div>
+            <div class="firstLine">
+              <%= cardData.recipient %> <% if (cardData.gender === "male") { %>
+              <%= descriptive %>, <% }%>
+            </div>
             <div class="msg">
-              מזל טוב ליום הולדתך!
+              <%= line1 %>
               <br />
-              שפע עכברים ומחילות!
+              <%= line2 %>
             </div>
             <div class="lastLine">
-              מאחלים גלי ובן
+              <%= plural %> <%= cardData.senderName %>
             </div>
           </div>
           <div class="imgStyle">
@@ -111,6 +114,11 @@
         </div>
       </div>
     </div>
+    <script
+      src="https://code.jquery.com/jquery-3.4.1.min.js"
+      integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+      crossorigin="anonymous"
+    ></script>
     <script src="/javascript/html2canvas.js"></script>
     <script src="/javascript/printscreen.js"></script>
   </body>

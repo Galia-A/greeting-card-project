@@ -1,3 +1,4 @@
+//converts card to a canvas img
 let cardDiv = document.querySelector(".cardDiv");
 cardDiv.style.letterSpacing = "0.1px";
 document.querySelector("#captureBtn").addEventListener("click", () => {
@@ -11,7 +12,20 @@ document.querySelector("#captureBtn").addEventListener("click", () => {
     x: window.pageXOffset,
     y: window.pageYOffset
   }).then(canvas => {
-    // document.body.appendChild(canvas);
-    window.open(canvas.toDataURL("image/png"), "_blank");
+    //img url
+    let imgUrl = canvas.toDataURL("image/png");
+
+    //get url id
+    let id = window.location.pathname.split("/").slice(-1)[0];
+    window.open(imgUrl, "_blank");
+
+    //ajax send pic url
+    $.ajax({
+      type: "POST",
+      url: `/cards/${id}`,
+      data: {
+        imgUrl: imgUrl
+      }
+    });
   });
 });

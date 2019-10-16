@@ -10,7 +10,7 @@ app.use(
   "/javascript",
   express.static(path.join(__dirname, "/node_modules/html2canvas/dist"))
 );
-app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.urlencoded({ limit: "50mb", extended: true }));
 
 //REST
 const methodOverride = require("method-override");

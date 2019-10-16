@@ -1,5 +1,5 @@
 //data
-// const data = require('./data');
+const cardsData = require("./cardsData");
 // const userData = require('./userData');
 
 function router(app) {
@@ -19,8 +19,24 @@ function router(app) {
       res.redirect("/cards/3");
     })
     //show generated card
-    .get("/cards/:id", (req, res) => {
-      res.render("showCard.ejs");
+    .get("/cards/:id", async (req, res) => {
+      let params = {
+        cardData: await cardsData.getOneCard("5da73e9e9c41fd5a20672585"),
+        descriptive: "היקר",
+        line1: "ttttמזל טוב ליום הולדתך!",
+        line2: "ttttשפע עכברים ומחילות!",
+        plural: "מאחלים"
+      };
+      // console.log("bur, ", params);
+
+      res.render("showCard.ejs", params);
+    })
+    .post("/cards/:id", async (req, res) => {
+      let imgUrl = req.body.imgUrl;
+      let cardId = req.params.id;
+
+      //add to db
+      //cardsData.
     });
 
   //register
