@@ -1,33 +1,149 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>New Card</title>
-  </head>
-  <body>
-    New card!!
+<% include partials/header %>
+  <title>New Card</title>
+  <link rel="stylesheet" href="/stylesheets/fonts.css">
+  <!-- <link rel="stylesheet" href="/stylesheets/showCard.css" /> -->
+  <link rel="stylesheet" href="https://cdn.rtlcss.com/bootstrap/v4.2.1/css/bootstrap.min.css" integrity="sha384-vus3nQHTD+5mpDiZ4rkEPlnkcyTP+49BhJ4wJeJunw06ZAp+wzzeBPUXr42fi8If" crossorigin="anonymous">
+  <style>
+    body{
+      font-family: 'GveretLevin';
+    }
+  .sketchDiv {
+  margin: auto auto;
+  padding: 20px;
+  transform: translate(0, 10%);
+  width: 800px;
+  border: 3px solid rgb(0, 204, 255);
+  border-radius: 5%;
+}
+.sketchHeadline{
+  margin-bottom: 5%;
+  text-align: center;
+}
+  </style>
+</head>
+<body>
+  <div id="wrapper">
+    <div class="container">
+      <div class="sketchDiv">
 
-    <form action="/cards" method="post">
-      <h2>פרטי בעל.ת השמחה</h2>
-      <label for="forname">שם </label>
-      <input type="text" name="card[forname]" id="forname" />
-      <label for="relation">דרגת הקירבה</label>
-      <input type="text" name="card[relation]" id="relation" />
-      <label for="gender">מין</label>
-      <input type="text" name="card[gender]" id="gender" />
-      <label for="partyType">סוג האירוע</label>
-      <input type="text" name="card[partyType]" id="partyType" />
-      <label for="age">גיל</label>
-      <input type="text" name="card[age]" id="age" />
-      <label for="interests">תחומי עניין</label>
-      <input type="text" name="card[interests]" id="interests" />
-      <label for="style">אופי</label>
-      <input type="text" name="card[style]" id="style" />
-      <label for="senderName">שמך (המאחל.ת)</label>
-      <input type="text" name="card[senderName]" id="senderName" />
-      <button type="submit">Go!!</button>
-    </form>
-  </body>
+        <h2 class="sketchHeadline">יצירת כרטיס ברכה חדש</h2>
+        
+        <form action="/cards" method="post">
+
+          <div class="form-group row">
+            <label for="forname" class="col-sm-2 col-form-label">למי הברכה? </label>
+            <div class="col-sm-4">
+              <input type="text" class="form-control" name="card[forname]" id="forname">
+            </div>
+          </div>
+
+          <fieldset class="form-group">
+              <div class="row">
+                <legend class="col-form-label col-sm-2 pt-0">צורת הפנייה</legend>
+                <div class="col-sm-4">
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="card[gender]" id="male" value="male" checked>
+                    <label class="form-check-label" for="male">
+                      זכר
+                    </label>
+                  </div>
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="card[gender]" id="female" value="female">
+                    <label class="form-check-label" for="female">
+                      נקבה
+                    </label>
+                  </div>
+                </div>
+              </div>
+            </fieldset>
+
+            <div class="form-group row">
+              <label class="col-sm-2 col-form-label offset-sm-3" for="eventType">מה האירוע? </label>
+              <div class="col-sm-4">
+              <select class="form-control" name="card[eventType]" id="eventType">
+                <option value="birthday" selected>יום הולדת</option>
+                <option value="endSchool" disabled>קבלת תואר</option>
+                <option value="anniversary" disabled>יום נישואין</option>
+              </select>
+           </div>
+
+          </div>
+
+          <fieldset class="form-group">
+              <div class="row">
+                <legend class="col-form-label col-sm-2 pt-0 offset-sm-3">תחומי עניין</legend>
+                <div class="col-sm-4">
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="card[interests]" id="interestsCats" value="cats">
+                    <label class="form-check-label" for="interestsCats">
+                      חתולים
+                    </label>
+                  </div>
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="card[interests]" id="interestsDogs" value="dogs">
+                    <label class="form-check-label" for="interestsDogs">
+                      כלבים
+                    </label>
+                  </div>
+                </div>
+              </div>
+            </fieldset>
+
+          <fieldset class="form-group">
+              <div class="row ">
+                <legend class="col-form-label col-sm-2 pt-0 offset-sm-3">אופי הברכה</legend>
+                <div class="col-sm-4">
+                  <div class="form-check">
+                    <input class="form-check-input" type="radio" name="card[style]" id="classic" value="classic" checked>
+                    <label class="form-check-label" for="classic">
+                      קלאסי
+                    </label>
+                  </div>
+                  <div class="form-check">
+                    <input class="form-check-input" type="radio" name="card[style]" id="Geek" value="Geek">
+                    <label class="form-check-label" for="Geek">
+                      גיק
+                    </label>
+                  </div>
+                </div>
+              </div>
+            </fieldset>
+
+          <div class="form-group row">
+            
+              <label class="col-sm-2 col-form-label offset-sm-7" for="senderSignature">צורת חתימה </label>
+              <div class="col-sm-3">
+              <select class="form-control" name="card[senderSignature]" id="senderSignature">
+                <option value="malePlural" selected>מאחלים</option>
+                <option value="femalePlural" >מאחלות</option>
+                <option value="maleSingle" >מאחל</option>
+                <option value="femaleSingle" >מאחלת</option>
+              </select>
+              </div>
+            
+          </div>
+
+          <div class="form-group row">
+              <label class="col-sm-2 col-form-label offset-sm-7" for="senderName">שמך / שמכם </label>
+              <div class="col-sm-3">
+              <input type="text" class="form-control" name="card[senderName]" id="senderName">
+            </div>
+          </div>
+          
+
+          <div class="row">
+              <div class="col-sm-9 offset-sm-5">
+                  <button type="submit" class="btn btn-info">לברכה!</button>
+              </div>
+          </div>
+
+        </form>
+      </div>
+    </div>
+  </div>
+  <!-- BOOTSTRAP -->
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+  <script src="https://cdn.rtlcss.com/bootstrap/v4.2.1/js/bootstrap.min.js" integrity="sha384-a9xOd0rz8w0J8zqj1qJic7GPFfyMfoiuDjC9rqXlVOcGO/dmRqzMn34gZYDTel8k" crossorigin="anonymous"></script>
+</body>
 </html>

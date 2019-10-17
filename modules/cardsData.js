@@ -4,7 +4,6 @@ const mongoose = mongooseConnect.getMongoose();
 
 // card Schema(s)
 let cardSchema = new mongoose.Schema({
-  cardId: Number, //save in user db //???
   recipientDescription: String, //חתול
   gender: String,
   genderDescription: String, //gender + style > היקר/ה, השולט/ת
@@ -13,10 +12,15 @@ let cardSchema = new mongoose.Schema({
   style: String,
   interests: [String], // for pic
   senderNameDescription: String,
-  senderPluralDescription: String, //change to מאחלים
+  senderSignature: String, //change to מאחלים
+  senderSignatureDescription: String,
   picUrl: String, //event type + interests > random from lists
   cssStyle: String, //need?
-  userId: mongoose.Schema.Types.ObjectId,
+  user: mongoose.Schema.Types.ObjectId,
+  // {
+  //   type: mongoose.Schema.Types.ObjectId,
+  //   ref: "User"
+  // }
   line1Description: String,
   line2Description: String,
   finalCardPicUrl: String
@@ -30,44 +34,17 @@ function getOneCard(cardId) {
 }
 
 //add new card
-function addNewCard(
-  recipient,
-  gender,
-  eventType,
-  style,
-  interests,
-  senderName,
-  senderPlural,
-  picUrl,
-  userId,
-  cssStyle,
-  cardId
-) {
-  let newCard = new Card({
-    recipientDescription: recipientDescription,
-    gender: gender,
-    genderDescription: genderDescription,
-    eventType: eventType,
-    eventDescription: eventDescription,
-    style: style,
-    interests: interests,
-    senderNameDescription: senderNameDescription,
-    senderPluralDescription: senderPluralDescription,
-    picUrl: picUrl,
-    cssStyle: cssStyle,
-    userId: userId,
-    line1Description: line1Description,
-    line2Description: line2Description,
-    finalCardPicUrl: finalCardPicUrl
-  });
-  newCard.save((err, result) => {
-    if (err) {
-      console.log("error inserting the card: " + err);
-    } else {
-      console.log("Card was inserted successfully!");
-      // console.log(result);
-    }
-  });
+function addNewCard(card) {
+  let newCard = new Card(card);
+  return newCard.save();
+  // newCard.save((err, result) => {
+  //   if (err) {
+  //     console.log("error inserting the card: " + err);
+  //   } else {
+  //     console.log("Card was inserted successfully!");
+  //     // console.log(result);
+  //   }
+  // });
 }
 function updateFinalImgUrl(cardId, url) {
   Card.findByIdAndUpdate(
@@ -101,14 +78,14 @@ module.exports = {
 //   style: "classic",
 //   interests: ["cat"],
 //   senderNameDescription: "גלי ובן",
-//   senderPluralDescription: "מאחלים",
+//   senderSignatureDescription: "מאחלים",
+//   senderSignature: "malePlural",
 //   picUrl: "https://live.staticflickr.com/7475/16113593846_4b113741fc_b.jpg",
 //   userId: mongoose.Types.ObjectId(),
 //   cssStyle: "border1",
 //   line1Description: "שפע עכברים ומחילות",
 //   line2Description: "שנהיה יחד בכל הלילות!",
 //   finalCardPicUrl: "",
-//   cardId: 1
 // });
 // newCard.save((err, result) => {
 //   if (err) {

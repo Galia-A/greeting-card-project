@@ -1,122 +1,47 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>My Card</title>
-    <style>
-      * {
-        box-sizing: border-box;
-      }
-      html {
-        direction: rtl;
-      }
-      body {
-        margin: 0;
-      }
-      #wrapper {
-        width: 100%;
-        position: relative;
-      }
-      #wrapper > .container {
-        width: 1140px;
-        margin: 0 auto;
-      }
-      .cardDiv {
-        margin: auto auto;
-        padding: 10px;
-        transform: translate(0, 10%);
-        display: flex;
-        justify-content: space-around;
-        width: 800px;
-      }
-      .border1 {
-        border: 8px double rgb(70, 1, 70);
-      }
-      .text1 {
-        font-family: "Times New Roman", Times, serif;
-        font-size: 24px;
-        line-height: 2;
-        width: 400px;
-      }
-      .text1 .firstLine {
-        font-weight: bold;
-        text-align: right;
-        margin-bottom: 15%;
-      }
-      .text1 .msg {
-        text-align: center;
-      }
-      .text1 .lastLine {
-        font-weight: bold;
-        text-align: left;
-        margin-top: 15%;
-      }
-      .imgStyle {
-        /* overflow: hidden; */
-      }
-      img {
-        width: auto;
-        height: auto;
-        max-width: 450px;
-        max-height: 450px;
-      }
-      .btns {
-        margin: 5% auto 0 auto;
-        /* border: 1px green solid; */
-        text-align: center;
-        width: 400px;
-        display: flex;
-        justify-content: space-around;
-      }
-      .instructions {
-        display: block;
-        /* border: 1px green solid; */
-        text-align: right;
-        width: 800px;
-        margin: 20px auto 0 auto;
-      }
-    </style>
-  </head>
-  <body>
-    <div id="wrapper">
-      <div class="container">
-        <div class="cardDiv  <%- cardData.cssStyle %>">
-          <div class="text1">
-            <div class="firstLine">
-              <%= cardData.recipientDescription %> <%=
-              cardData.genderDescription %>,
-            </div>
-            <div class="msg">
-              <%= cardData.eventDescription %> <%= cardData.line1Description %>
-              <br />
-              <%= cardData.line2Description %>
-            </div>
-            <div class="lastLine">
-              <%= cardData.senderPluralDescription %> <%=
-              cardData.senderNameDescription %>
-            </div>
+<% include partials/header %>
+<title>My Card</title>
+<link rel="stylesheet" href="/stylesheets/showCard.css" />
+</head>
+<body>
+  <div id="wrapper">
+    <div class="container">
+      <div class="cardDiv  <%- cardData.cssStyle %>">
+        <div class="text1">
+          <div class="firstLine">
+            <%= cardData.recipientDescription %> <%= cardData.genderDescription
+            %>
           </div>
-          <div class="imgStyle">
-            <img src= <%= cardData.picUrl %> alt= <%= cardData.eventType %> />
+          <div class="eventMsg"><%= cardData.eventDescription %> </div>
+          <div class="msg">
+            <%= cardData.line1Description %>
+            <br />
+            <%= cardData.line2Description %>
+          </div>
+          <div class="lastLine">
+            <%= cardData.senderSignatureDescription %> <%=
+            cardData.senderNameDescription %>
           </div>
         </div>
-        <div class="btns">
-          <button id="captureBtn">שמירה</button>
-          <button id="editBtn">עריכה</button>
-        </div>
-        <div class="instructions">
-          * לחיצה על כפתור שמירה תפתח חלון חדש בו עליכם ללחוץ על 'שמירה כתמונה'
+        <div class="imgStyle">
+          <img src= <%= cardData.picUrl %> alt= <%= cardData.eventType %> />
         </div>
       </div>
+      <div class="btns">
+        <button id="captureBtn">שמירה</button>
+        <button id="editBtn">עריכה</button>
+      </div>
+      <div class="instructions">
+        * לחיצה על כפתור שמירה תפתח חלון חדש בו עליכם ללחוץ על 'שמירה כתמונה'
+      </div>
     </div>
-    <script
-      src="https://code.jquery.com/jquery-3.4.1.min.js"
-      integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
-      crossorigin="anonymous"
-    ></script>
-    <script src="/javascript/html2canvas.js"></script>
-    <script src="/javascript/printscreen.js"></script>
-  </body>
-</html>
+  </div>
+  <script
+    src="https://code.jquery.com/jquery-3.4.1.min.js"
+    integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+    crossorigin="anonymous"
+  ></script>
+  <script src="/javascript/html2canvas.js"></script>
+  <script src="/javascript/printscreen.js"></script>
+
+  <% include partials/footer %>
+

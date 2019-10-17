@@ -1,5 +1,6 @@
 //data
 const cardsData = require("./cardsData");
+const cardContent = require("./cardContent");
 // const userData = require('./userData');
 
 function router(app) {
@@ -15,13 +16,20 @@ function router(app) {
     //add data to DB & create the card
     .post("/cards", (req, res) => {
       let card = req.body.card;
-
-      res.redirect("/cards/5da78a7f049476535803390c");
+      cardContent
+        .createCardContent(card)
+        .then(card => {
+          res.redirect(`/cards/${card._id}`);
+        })
+        .catch(err => console.log(`There was an error: ${err}`));
+      // console.log("card send to update");
+      //res.send("bur");
+      // res.redirect("/cards/5da78a7f049476535803390c");
     })
     //show generated card
     .get("/cards/:id", async (req, res) => {
       let params = {
-        cardData: await cardsData.getOneCard("5da78a7f049476535803390c")
+        cardData: await cardsData.getOneCard(req.params.id)
       };
       // console.log("bur, ", params);
 

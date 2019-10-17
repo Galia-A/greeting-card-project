@@ -1,0 +1,17 @@
+* {
+  box-sizing: border-box;
+}
+html {
+  direction: rtl;
+}
+body {
+  margin: 0;
+}
+#wrapper {
+  width: 100%;
+  position: relative;
+}
+#wrapper > .container {
+  width: 1140px;
+  margin: 0 auto;
+}
