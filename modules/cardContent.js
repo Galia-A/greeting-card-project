@@ -33,18 +33,19 @@ let greetingContent = {
 //interests greetings
 let interestsGreetings = {
   general: [["שפע ברכות ואיחולים,", "בריאות, שמחה, אהבה והצלחה בכל התחומים"]],
-  cats: [["שפע עכברים ומחילות", "שנהיה יחד בכל הלילות!"]]
+  cats: [["שפע עכברים ומחילות", "שנהיה יחד בכל הלילות!"]],
+  dogs: [["שפע עכברים ומחילות", "שנהיה יחד בכל הלילות!"]]
 };
 
 //pics urls
 let interestsPics = {
   general: ["/images/balloons.png"],
-  cats: ["https://live.staticflickr.com/7475/16113593846_4b113741fc_b.jpg"]
+  cats: ["https://live.staticflickr.com/7475/16113593846_4b113741fc_b.jpg"],
+  dogs: ["https://live.staticflickr.com/7475/16113593846_4b113741fc_b.jpg"]
 };
 
-function createCardContent(userCard) {
-  //console.log(`userCard: ${JSON.stringify(userCard)}`);
-
+function createCardContent(userCard, createNew = true, cardId) {
+  //   console.log(`userCard: ${JSON.stringify(userCard)}`);
   let recipientDescription = validateInput(userCard.forname);
   let gender = validateGender(userCard.gender);
   let style = validateStyle(userCard.style);
@@ -87,8 +88,13 @@ function createCardContent(userCard) {
     line2Description: line2Description,
     finalCardPicUrl: ""
   };
-  console.log("new card ", newCard);
-  return cardsData.addNewCard(newCard);
+  if (createNew) {
+    console.log("in create new card");
+    return cardsData.addNewCard(newCard);
+  } else {
+    console.log("in EDIT new card");
+    return cardsData.editCard(cardId, newCard);
+  }
 }
 function validateInput(input) {
   return input.trim().length === 0 ? "" : input.trim();
@@ -97,13 +103,13 @@ function validateGender(input) {
   return input.length === 0 ? "" : input;
 }
 function validateStyle(input) {
-  return input.length === 0 ? "classic" : input;
+  return input ? input : "classic";
 }
 function validateEventType(input) {
   return input.length === 0 ? "birthday" : input;
 }
 function validateInterests(input) {
-  return input ? input : ["general"];
+  return input ? input : "general";
 }
 function validateSigniture(input) {
   return input.length === 0 ? "malePlural" : input;

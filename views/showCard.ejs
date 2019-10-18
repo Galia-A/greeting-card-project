@@ -1,47 +1,75 @@
-<% include partials/header %>
-<title>My Card</title>
-<link rel="stylesheet" href="/stylesheets/showCard.css" />
-</head>
-<body>
-  <div id="wrapper">
-    <div class="container">
-      <div class="cardDiv  <%- cardData.cssStyle %>">
-        <div class="text1">
-          <div class="firstLine">
-            <%= cardData.recipientDescription %> <%= cardData.genderDescription
-            %>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <link rel="stylesheet" href="/stylesheets/allSite.css" />
+
+    <!-- <% include partials/header %> -->
+    <title>My Card</title>
+    <link rel="stylesheet" href="/stylesheets/showCard.css" />
+    <style>
+      .btn {
+        color: #fefefe;
+        background: #190042;
+        -webkit-transition: none;
+        -moz-transition: none;
+        transition: none;
+        border: 4px solid #190042;
+        text-align: center;
+        border-radius: 60px;
+        width: 100px;
+        padding: 5px;
+      }
+      .btn:hover {
+        background: transparent;
+        color: #190042;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="wrapper">
+      <div class="container">
+        <div class="cardDiv  <%- cardData.cssStyle %>">
+          <div class="text1">
+            <div class="firstLine">
+              <%= cardData.recipientDescription %> <%=
+              cardData.genderDescription %>
+            </div>
+            <div class="eventMsg"><%= cardData.eventDescription %></div>
+            <div class="msg">
+              <%= cardData.line1Description %>
+              <br />
+              <%= cardData.line2Description %>
+            </div>
+            <div class="lastLine">
+              <%= cardData.senderSignatureDescription %> <%=
+              cardData.senderNameDescription %>
+            </div>
           </div>
-          <div class="eventMsg"><%= cardData.eventDescription %> </div>
-          <div class="msg">
-            <%= cardData.line1Description %>
-            <br />
-            <%= cardData.line2Description %>
-          </div>
-          <div class="lastLine">
-            <%= cardData.senderSignatureDescription %> <%=
-            cardData.senderNameDescription %>
+          <div class="imgStyle">
+            <img src= <%= cardData.picUrl %> alt= <%= cardData.eventType %> />
           </div>
         </div>
-        <div class="imgStyle">
-          <img src= <%= cardData.picUrl %> alt= <%= cardData.eventType %> />
+        <div class="btns">
+          <button class="btn" id="captureBtn">שמירה</button>
+          <button class="btn" id="editBtn">עריכה</button>
         </div>
-      </div>
-      <div class="btns">
-        <button id="captureBtn">שמירה</button>
-        <button id="editBtn">עריכה</button>
-      </div>
-      <div class="instructions">
-        * לחיצה על כפתור שמירה תפתח חלון חדש בו עליכם ללחוץ על 'שמירה כתמונה'
+        <div class="instructions">
+          * לחיצה על כפתור שמירה תפתח חלון חדש בו עליכם ללחוץ על 'שמירה כתמונה'
+        </div>
       </div>
     </div>
-  </div>
-  <script
-    src="https://code.jquery.com/jquery-3.4.1.min.js"
-    integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
-    crossorigin="anonymous"
-  ></script>
-  <script src="/javascript/html2canvas.js"></script>
-  <script src="/javascript/printscreen.js"></script>
+    <script
+      src="https://code.jquery.com/jquery-3.4.1.min.js"
+      integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+      crossorigin="anonymous"
+    ></script>
+    <script src="/javascript/html2canvas.js"></script>
+    <script src="/javascript/printscreen.js"></script>
+    <script src="/javascript/editCardBtn.js"></script>
 
-  <% include partials/footer %>
-
+    <!-- <% include partials/footer %> -->
+  </body>
+</html>

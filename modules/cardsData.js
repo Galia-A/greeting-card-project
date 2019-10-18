@@ -4,18 +4,18 @@ const mongoose = mongooseConnect.getMongoose();
 
 // card Schema(s)
 let cardSchema = new mongoose.Schema({
-  recipientDescription: String, //חתול
+  recipientDescription: String,
   gender: String,
-  genderDescription: String, //gender + style > היקר/ה, השולט/ת
+  genderDescription: String,
   eventType: String,
-  eventDescription: String, //first random line + style? > מזל טוב ליום הולדת! יום הולדת שמח!
+  eventDescription: String,
   style: String,
-  interests: [String], // for pic
+  interests: String,
   senderNameDescription: String,
-  senderSignature: String, //change to מאחלים
+  senderSignature: String,
   senderSignatureDescription: String,
-  picUrl: String, //event type + interests > random from lists
-  cssStyle: String, //need?
+  picUrl: String,
+  cssStyle: String,
   user: mongoose.Schema.Types.ObjectId,
   // {
   //   type: mongoose.Schema.Types.ObjectId,
@@ -37,14 +37,6 @@ function getOneCard(cardId) {
 function addNewCard(card) {
   let newCard = new Card(card);
   return newCard.save();
-  // newCard.save((err, result) => {
-  //   if (err) {
-  //     console.log("error inserting the card: " + err);
-  //   } else {
-  //     console.log("Card was inserted successfully!");
-  //     // console.log(result);
-  //   }
-  // });
 }
 function updateFinalImgUrl(cardId, url) {
   Card.findByIdAndUpdate(
@@ -62,10 +54,15 @@ function updateFinalImgUrl(cardId, url) {
   );
 }
 
+function editCard(cardId, editedCard) {
+  return Card.findByIdAndUpdate(cardId, editedCard);
+}
+
 module.exports = {
   getOneCard: getOneCard,
   addNewCard: addNewCard,
-  updateFinalImgUrl: updateFinalImgUrl
+  updateFinalImgUrl: updateFinalImgUrl,
+  editCard: editCard
 };
 
 //-- demo card --//

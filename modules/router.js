@@ -11,8 +11,13 @@ function router(app) {
     })
     //create new card
     .get("/cards/new", (req, res) => {
-      res.render("newCard.ejs");
+      let params = {
+        headline: "יצירת כרטיס ברכה חדש",
+        cardData: {}
+      };
+      res.render("newCard.ejs", params);
     })
+
     //add data to DB & create the card
     .post("/cards", (req, res) => {
       let card = req.body.card;
@@ -21,29 +26,45 @@ function router(app) {
         .then(card => {
           res.redirect(`/cards/${card._id}`);
         })
-        .catch(err => console.log(`There was an error: ${err}`));
-      // console.log("card send to update");
-      //res.send("bur");
-      // res.redirect("/cards/5da78a7f049476535803390c");
+        .catch(err => console.log(`There was an error: `));
     })
     //show generated card
     .get("/cards/:id", async (req, res) => {
       let params = {
         cardData: await cardsData.getOneCard(req.params.id)
       };
-      // console.log("bur, ", params);
 
       res.render("showCard.ejs", params);
     })
     .post("/cards/:id", async (req, res) => {
       let imgUrl = req.body.imgUrl;
       let cardId = req.params.id;
-      console.log("in update img url");
-
       //update db
       cardsData.updateFinalImgUrl(cardId, imgUrl);
-    });
+    })
+    //edit card
+    .get("/cards/:id/edit", async (req, res) => {
+      let params = {
+        cardId: req.params.id,
+        cardData: await cardsData.getOneCard(req.params.id),
+        headline: "עריכת כרטיס הברכה"
+      };
+      res.render("newCard.ejs", params);
+    })
 
+    //edit existing card
+    .post("/cards/:id/edit", async (req, res) => {
+      let cardId = req.params.id;
+      let card = req.body.card;
+      //update db
+      cardContent
+        .createCardContent(card, false, cardId)
+        .then(card => {
+          console.log("EDIT SUCCESSFUL!");
+          res.redirect(`/cards/${card._id}`);
+        })
+        .catch(err => console.log(`There was an error in update`));
+    });
   //register
 
   //login

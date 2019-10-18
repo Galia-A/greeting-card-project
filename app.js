@@ -1,10 +1,18 @@
+//packages
 const express = require("express");
-const app = express();
 const bodyParser = require("body-parser");
 const path = require("path");
+const passport = require("passport");
+const LocalStrategy = require("passport-local");
+const LocalStrategyMongoose = require("passport-local-mongoose");
+const session = require("express-session");
+const app = express();
 
 //SETTINGS
 app.set("view engine", "ejs");
+app.use(
+  session({ secret: "Greetings", resave: false, saveUninitialized: false })
+);
 app.use(express.static("public"));
 app.use(
   "/javascript",
