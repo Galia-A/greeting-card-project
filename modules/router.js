@@ -2,12 +2,23 @@
 const cardsData = require("./cardsData");
 const cardContent = require("./cardContent");
 // const userData = require('./userData');
+const User = require("./user");
+const passport = require("passport");
+
+function isLoggedIn(req, res, next) {
+  if (req.isAuthenticated()) {
+    next();
+  } else {
+    res.redirect("/login");
+  }
+}
 
 function router(app) {
   app
     //  '/' home page
     .get("/", (req, res) => {
-      res.render("homepage.ejs");
+      let params = { loggedUser: req.user };
+      res.render("homepage.ejs", params);
     })
     //create new card
     .get("/cards/new", (req, res) => {
@@ -64,6 +75,43 @@ function router(app) {
           res.redirect(`/cards/${card._id}`);
         })
         .catch(err => console.log(`There was an error in update`));
+    })
+    //user register
+    .get("/register", (req, res) => {
+      res.render("register");
+    })
+    .post("/register", (req, res) => {
+      User.register(req.body, req.body.password, (err, user) => {
+        if (err) {
+          console.log(err);
+          res.render("register", err);
+        } else {
+          passport.authenticate("local")(req, res, () => {
+            res.redirect("/account");
+          });
+        }
+      });
+    })
+    //user login
+    .get("/login", (req, res) => {
+      res.render("login");
+    })
+    .post(
+      "/login",
+      passport.authenticate("local", {
+        successRedirect: "/account",
+        failureRedirect: "/login"
+      }),
+      () => {}
+    )
+    //user logout
+    .get("/logout", (req, res) => {
+      req.logout();
+      res.redirect("/");
+    })
+    //user account page
+    .get("/account", isLoggedIn, (req, res) => {
+      res.render("account");
     });
   //register
 
