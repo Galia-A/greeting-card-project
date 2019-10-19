@@ -78,13 +78,27 @@ function router(app) {
     })
     //user register
     .get("/register", (req, res) => {
-      res.render("register");
+      res.render("register", {
+        name: "",
+        message: "",
+        firstName: "",
+        lastName: "",
+        email: ""
+      });
     })
     .post("/register", (req, res) => {
+      //This is for DEV only!
+      //TODO - delete on deploy
+      req.body.isAdmin = req.body.adminCode === "9876";
+      //////////////////////////////////////////////////
       User.register(req.body, req.body.password, (err, user) => {
         if (err) {
           console.log(err);
-          res.render("register", err);
+          res.render("register", {
+            name: "UserExistsError",
+            message: "שם המשתמש כבר קיים במערכת",
+            ...req.body
+          });
         } else {
           passport.authenticate("local")(req, res, () => {
             res.redirect("/account");
@@ -113,11 +127,6 @@ function router(app) {
     .get("/account", isLoggedIn, (req, res) => {
       res.render("account");
     });
-  //register
-
-  //login
-
-  //user profile
 
   //SHOW ALL POSTS - V
   /*    .get("/posts", async (req, res) => {

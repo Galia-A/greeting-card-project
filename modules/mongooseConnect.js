@@ -5,6 +5,7 @@ function connectMongoose() {
   mongoose.set("useNewUrlParser", true);
   mongoose.set("useUnifiedTopology", true);
   mongoose.set("useFindAndModify", false);
+  mongoose.set("useCreateIndex", true);
   mongoose.connect("mongodb://localhost:27017/greetingCards");
   isConnected = true;
   console.log("connected to mongoose");

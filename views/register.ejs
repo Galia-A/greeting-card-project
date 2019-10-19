@@ -7,6 +7,10 @@
     <title>Register</title>
     <link rel="stylesheet" href="/stylesheets/fonts.css" />
     <link rel="stylesheet" href="/stylesheets/allSite.css" />
+    <link
+      href="https://fonts.googleapis.com/css?family=Pacifico&display=swap"
+      rel="stylesheet"
+    />
     <!-- <link rel="stylesheet" href="/stylesheets/showCard.css" /> -->
     <link
       rel="stylesheet"
@@ -17,6 +21,9 @@
     <style>
       body {
         font-family: "GveretLevin";
+      }
+      .handWriteFontEnglish {
+        font-family: "Pacifico", cursive;
       }
       .registerFormDiv {
         margin: auto auto;
@@ -80,9 +87,13 @@
                   class="form-control"
                   name="firstName"
                   id="firstName"
-                  value=""
+                  pattern="^[א-ת][א-ת-' ]{1,20}$"
+                  value="<% if (firstName) { %> <%- firstName %> <% } %>"
                   required
                 />
+                <small id="firstName" class="form-text text-muted">
+                  בעברית בבקשה
+                </small>
               </div>
             </div>
             <!-- last name -->
@@ -96,21 +107,25 @@
                   class="form-control"
                   name="lastName"
                   id="lastName"
-                  value=""
+                  pattern="^[א-ת][א-ת-' ]{1,20}$"
+                  value="<% if (lastName) { %> <%- lastName %> <% } %>"
                   required
                 />
+                <small id="firstName" class="form-text text-muted">
+                  בעברית בבקשה
+                </small>
               </div>
             </div>
             <!-- email -->
             <div class="form-group form-row">
               <label for="email" class="col-sm-2 col-form-label">דוא"ל </label>
-              <div class="col-sm-5">
+              <div class="col-sm-5 handWriteFontEnglish">
                 <input
                   type="email"
                   class="form-control"
                   name="email"
+                  value="<% if (email) { %> <%- email %> <% } %>"
                   id="email"
-                  value=""
                   required
                 />
               </div>
@@ -120,7 +135,7 @@
               <label for="username" class="col-sm-2 col-form-label"
                 >שם משתמש
               </label>
-              <div class="col-sm-5">
+              <div class="col-sm-5 handWriteFontEnglish">
                 <input
                   type="text"
                   class="form-control"
@@ -129,8 +144,10 @@
                   value=""
                   required
                 />
+                <small class="form-text text-danger">
+                  <% if (message) { %> <%= message %> <% } %>
+                </small>
               </div>
-              <% if (message) { %> <%= message %> <% } %>
             </div>
 
             <!-- password -->
@@ -152,7 +169,23 @@
                   הסיסמה צריכה להיות מורכבת מ 4-8 אותיות ומספרים
                 </small>
               </div>
-              <!-- </div> -->
+            </div>
+
+            <!-- admin code -->
+            <div class="form-group form-row">
+              <label for="adminCode" class="col-sm-2 col-form-label"
+                >קוד אדמין
+              </label>
+              <div class="col-sm-2 ">
+                <input
+                  type="text"
+                  class="form-control"
+                  name="adminCode"
+                  id="adminCode"
+                  pattern="[0-9]{4}"
+                  value=""
+                />
+              </div>
             </div>
 
             <div class="row">

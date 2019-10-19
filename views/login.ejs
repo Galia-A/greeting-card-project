@@ -5,15 +5,140 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>Login</title>
+    <link rel="stylesheet" href="/stylesheets/fonts.css" />
+    <link rel="stylesheet" href="/stylesheets/allSite.css" />
+    <link
+      href="https://fonts.googleapis.com/css?family=Pacifico&display=swap"
+      rel="stylesheet"
+    />
+    <!-- <link rel="stylesheet" href="/stylesheets/showCard.css" /> -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.rtlcss.com/bootstrap/v4.2.1/css/bootstrap.min.css"
+      integrity="sha384-vus3nQHTD+5mpDiZ4rkEPlnkcyTP+49BhJ4wJeJunw06ZAp+wzzeBPUXr42fi8If"
+      crossorigin="anonymous"
+    />
+    <style>
+      body {
+        font-family: "GveretLevin";
+      }
+      .handWriteFontEnglish {
+        font-family: "Pacifico", cursive;
+      }
+      .registerFormDiv {
+        margin: auto auto;
+        padding: 30px;
+        transform: translate(0, 10%);
+        width: 800px;
+        border: 3px solid rgb(255, 136, 0);
+        border-radius: 5%;
+        position: relative;
+        /* display: flex;
+          justify-content: space-around; */
+      }
+      .registerHeadline {
+        margin-bottom: 5%;
+        /* text-align: center; */
+        transform: translate(-33%, 0);
+      }
+      .btnEffect {
+        color: #fefefe;
+        background: #190042;
+        -webkit-transition: none;
+        -moz-transition: none;
+        transition: none;
+        border: 4px solid #190042;
+        text-align: center;
+        border-radius: 60px;
+        width: 100px;
+        padding: 5px;
+        margin-top: 5%;
+      }
+      .btnEffect:hover {
+        background: transparent;
+        color: #190042;
+      }
+      img {
+        width: auto;
+        height: auto;
+        max-width: 200px;
+        max-height: 200px;
+        position: absolute;
+        bottom: 5%;
+        left: 4%;
+      }
+      .LoginFormDiv {
+        border: 3px solid rgb(255, 0, 128);
+        border-radius: 15%;
+      }
+    </style>
   </head>
   <body>
-    <h2>Login</h2>
-    <form action="/login" method="post">
-      <label for="username">שם משתמש</label>
-      <input type="text" name="username" id="username" /><br />
-      <label for="password">סיסמה</label>
-      <input type="text" name="password" id="password" />
-      <button type="submit">היכנס</button>
-    </form>
+    <div id="wrapper">
+      <div class="container">
+        <div class="registerFormDiv LoginFormDiv">
+          <h2 class="registerHeadline">כניסה</h2>
+          <img src="/images/hello_dog.jpg" alt="hello" />
+
+          <form action="/login" method="post">
+            <!-- user Name -->
+            <div class="form-group form-row">
+              <label for="username" class="col-sm-2 col-form-label"
+                >שם משתמש
+              </label>
+              <div class="col-sm-5 handWriteFontEnglish">
+                <input
+                  type="text"
+                  class="form-control"
+                  name="username"
+                  id="username"
+                  value=""
+                  required
+                />
+              </div>
+            </div>
+
+            <!-- password -->
+            <div class="form-group form-row">
+              <label for="password" class="col-sm-2 col-form-label"
+                >סיסמה
+              </label>
+              <div class="col-sm-5">
+                <input
+                  type="password"
+                  class="form-control"
+                  name="password"
+                  id="password"
+                  value=""
+                  pattern="[0-9a-zA-Z]{4,8}"
+                  required
+                />
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-sm-9 offset-sm-4">
+                <button type="submit" class="btnEffect">רישום</button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+    <!-- BOOTSTRAP -->
+    <script
+      src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+      integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"
+      integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.rtlcss.com/bootstrap/v4.2.1/js/bootstrap.min.js"
+      integrity="sha384-a9xOd0rz8w0J8zqj1qJic7GPFfyMfoiuDjC9rqXlVOcGO/dmRqzMn34gZYDTel8k"
+      crossorigin="anonymous"
+    ></script>
   </body>
 </html>

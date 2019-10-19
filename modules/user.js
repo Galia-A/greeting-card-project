@@ -4,7 +4,11 @@ const mongoose = mongooseConnect.getMongoose();
 const LocalStrategyMongoose = require("passport-local-mongoose");
 
 const UserSchema = new mongoose.Schema({
-  username: String
+  firstName: String,
+  lastName: String,
+  email: String,
+  isAdmin: { type: Boolean, default: false },
+  isActive: { type: Boolean, default: true }
 });
 UserSchema.plugin(LocalStrategyMongoose);
 
