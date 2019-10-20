@@ -5,10 +5,3 @@
   font-weight: normal;
   font-style: normal;
 }
-
-@font-face {
-  font-family: "Dana";
-  src: url("fonts/DanaYadAlefAlefAlef-Normal.otf") format("opentype");
-  font-weight: normal;
-  font-style: normal;
-}

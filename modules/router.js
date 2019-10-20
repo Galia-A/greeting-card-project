@@ -1,8 +1,10 @@
 //data
+const fs = require("fs");
 const cardsData = require("./cardsData");
 const cardContent = require("./cardContent");
 // const userData = require('./userData');
-const User = require("./user");
+const userData = require("./userData");
+const User = userData.User;
 const passport = require("passport");
 
 function isLoggedIn(req, res, next) {
@@ -10,6 +12,13 @@ function isLoggedIn(req, res, next) {
     next();
   } else {
     res.redirect("/login");
+  }
+}
+function isAdmin(req, res, next) {
+  if (req.isAuthenticated() && req.user.isAdmin) {
+    next();
+  } else {
+    res.status(403).redirect("/");
   }
 }
 
@@ -21,7 +30,7 @@ function router(app) {
       res.render("homepage.ejs", params);
     })
     //create new card
-    .get("/cards/new", (req, res) => {
+    .get("/cards/new", isLoggedIn, (req, res) => {
       let params = {
         headline: "יצירת כרטיס ברכה חדש",
         cardData: {}
@@ -30,8 +39,9 @@ function router(app) {
     })
 
     //add data to DB & create the card
-    .post("/cards", (req, res) => {
+    .post("/cards", isLoggedIn, (req, res) => {
       let card = req.body.card;
+      card.user = req.user._id;
       cardContent
         .createCardContent(card)
         .then(card => {
@@ -40,21 +50,24 @@ function router(app) {
         .catch(err => console.log(`There was an error: `));
     })
     //show generated card
-    .get("/cards/:id", async (req, res) => {
+    .get("/cards/:id", isLoggedIn, async (req, res) => {
       let params = {
         cardData: await cardsData.getOneCard(req.params.id)
       };
 
       res.render("showCard.ejs", params);
     })
-    .post("/cards/:id", async (req, res) => {
-      let imgUrl = req.body.imgUrl;
-      let cardId = req.params.id;
-      //update db
-      cardsData.updateFinalImgUrl(cardId, imgUrl);
+    .put("/cards/:id", isLoggedIn, async (req, res) => {
+      let data = req.body.imgUrl.replace(/^data:image\/png;base64,/, "");
+      let imgUrl = `/userImages/${req.params.id}.png`;
+      fs.writeFileSync(`public/${imgUrl}`, data, {
+        encoding: "base64"
+      });
+      cardsData.updateFinalImgUrl(req.params.id, req.body.imgUrl, imgUrl);
+      userData.addCard(req.user._id, req.params.id);
     })
     //edit card
-    .get("/cards/:id/edit", async (req, res) => {
+    .get("/cards/:id/edit", isLoggedIn, async (req, res) => {
       let params = {
         cardId: req.params.id,
         cardData: await cardsData.getOneCard(req.params.id),
@@ -64,7 +77,7 @@ function router(app) {
     })
 
     //edit existing card
-    .post("/cards/:id/edit", async (req, res) => {
+    .post("/cards/:id/edit", isLoggedIn, async (req, res) => {
       let cardId = req.params.id;
       let card = req.body.card;
       //update db
@@ -106,6 +119,28 @@ function router(app) {
         }
       });
     })
+    //edit user details
+    .get("/edit", isLoggedIn, (req, res) => {
+      res.render("editUser", req.user);
+    })
+    .post("/edit", isLoggedIn, async (req, res) => {
+      //This is for DEV only!
+      //TODO - delete on deploy
+      req.body.isAdmin = req.body.adminCode === "9876";
+      //////////////////////////////////////////////////
+      let user = await User.findByIdAndUpdate(req.user._id, {
+        firstName: req.body.firstName,
+        lastName: req.body.lastName,
+        email: req.body.email,
+        isAdmin: req.body.isAdmin
+      });
+      if (req.body.password) {
+        await user.setPassword(req.body.password);
+        await user.save();
+      }
+      res.redirect("/account");
+    })
+
     //user login
     .get("/login", (req, res) => {
       res.render("login");
@@ -124,71 +159,18 @@ function router(app) {
       res.redirect("/");
     })
     //user account page
-    .get("/account", isLoggedIn, (req, res) => {
-      res.render("account");
-    });
+    .get("/account", isLoggedIn, async (req, res) => {
+      let user = await User.findById(req.user._id)
+        .populate("cards")
+        .exec();
+      // console.log("user", user.cards[0].cssStyle);
 
-  //SHOW ALL POSTS - V
-  /*    .get("/posts", async (req, res) => {
-      //res.send("The book list");
-      let params = {
-        allPosts: await postsData.getAllPosts()
-      };
-      res.render("posts.ejs", params);
+      res.render("account", user);
     })
-    //ADD POST FORM - V
-    .get("/post/new", (req, res) => {
-      res.render("postNewForm.ejs");
-    })
-    //ADD POST TO DB - V
-    .post("/posts", (req, res) => {
-      let headline = req.body.headline;
-      let picUrl = req.body.pictureUrl;
-      let description = req.body.description;
-      let content = req.body.content;
-      postsData.addNewPost(headline, picUrl, description, content);
-      res.redirect("/posts");
-    })
-    //SHOW 1 POST - V
-    .get("/posts/:id", async (req, res) => {
-      let pId = req.params.id;
-      let params = {
-        onePost: await postsData.getOnePost(pId)
-      };
-      res.render("post.ejs", params);
-    })
-    //EDIT POST - V
-    .get("/posts/:id/edit", async (req, res) => {
-      let pId = req.params.id;
-      let params = {
-        onePost: await postsData.getOnePost(pId)
-      };
-      res.render("edit.ejs", params);
-    })
-    //SAVE CHANE TO DB
-    .put("/posts/:id", (req, res) => {
-      let pId = req.params.id;
-      let headline = req.body.headline;
-      let picUrl = req.body.pictureUrl;
-      let description = req.body.description;
-      let content = req.body.content;
-      postsData.updatePost(pId, headline, picUrl, description, content);
-      res.redirect("/posts");
-    })
-    //DELETE
-    .delete("/posts/:id", (req, res) => {
-      let pId = req.params.id;
-      postsData.deletePost(pId);
-      res.redirect("/posts");
-    })
-    //Add a comment to DB
-    .post("/posts/:id/comment", (req, res) => {
-      let commentTxt = req.body.comment;
-      let pId = req.params.id;
-      postsData.addNewComment(commentTxt, pId);
-      res.redirect(`/posts/${pId}`);
+    //admin page
+    .get("/admin", isAdmin, (req, res) => {
+      res.render("admin");
     });
-    */
 }
 
 module.exports = router;

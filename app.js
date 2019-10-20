@@ -7,7 +7,8 @@ const app = express();
 //passport
 const passport = require("passport");
 const LocalStrategy = require("passport-local");
-const User = require("./modules/user");
+const userData = require("./modules/userData");
+const User = userData.User;
 ////
 
 //SETTINGS
@@ -27,6 +28,14 @@ app.use(express.static("public"));
 app.use(
   "/javascript",
   express.static(path.join(__dirname, "/node_modules/html2canvas/dist"))
+);
+app.use(
+  "/stylesheets",
+  express.static(path.join(__dirname, "/node_modules/slick-carousel/slick"))
+);
+app.use(
+  "/javascript",
+  express.static(path.join(__dirname, "/node_modules/slick-carousel/slick"))
 );
 app.use(bodyParser.urlencoded({ limit: "50mb", extended: true }));
 

@@ -16,14 +16,14 @@ let cardSchema = new mongoose.Schema({
   senderSignatureDescription: String,
   picUrl: String,
   cssStyle: String,
-  user: mongoose.Schema.Types.ObjectId,
-  // {
-  //   type: mongoose.Schema.Types.ObjectId,
-  //   ref: "User"
-  // }
+  user: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "User"
+  },
   line1Description: String,
   line2Description: String,
-  finalCardPicUrl: String
+  finalCardPicUrl: String,
+  finalCardPicLocal: String
 });
 let Card = mongoose.model("Card", cardSchema);
 
@@ -38,11 +38,12 @@ function addNewCard(card) {
   let newCard = new Card(card);
   return newCard.save();
 }
-function updateFinalImgUrl(cardId, url) {
+function updateFinalImgUrl(cardId, url, localUrl) {
   Card.findByIdAndUpdate(
     cardId,
     {
-      finalCardPicUrl: url
+      finalCardPicUrl: url,
+      finalCardPicLocal: localUrl
     },
     (err, card) => {
       if (err) {

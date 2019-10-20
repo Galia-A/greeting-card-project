@@ -5,8 +5,150 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>Account</title>
+
+    <link
+      rel="stylesheet"
+      href="https://cdn.rtlcss.com/bootstrap/v4.2.1/css/bootstrap.min.css"
+      integrity="sha384-vus3nQHTD+5mpDiZ4rkEPlnkcyTP+49BhJ4wJeJunw06ZAp+wzzeBPUXr42fi8If"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="/stylesheets/fonts.css" />
+    <link
+      href="https://fonts.googleapis.com/css?family=Pacifico&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/stylesheets/allSite.css" />
+    <!-- <link rel="stylesheet" href="/stylesheets/showCard.css" /> -->
+    <link rel="stylesheet" href="/stylesheets/slick.css" />
+    <link rel="stylesheet" href="/stylesheets/slick-theme.css" />
+    <style>
+      .mainDiv {
+        margin: auto auto;
+        padding: 30px;
+        transform: translate(0, 10%);
+        width: 1000px;
+        border: 3px solid rgb(106, 204, 111);
+        border-radius: 5%;
+        position: relative;
+        /* display: flex;
+          justify-content: space-around; */
+      }
+      .accountHeadline {
+        margin-bottom: 5%;
+        text-align: center;
+      }
+      .hello {
+        font-size: xx-large;
+        margin-bottom: 10%;
+      }
+      .editDetailsBtn {
+        font-size: large;
+        color: rgb(137, 190, 150);
+      }
+      .editDetailsBtn:hover {
+        color: #10c562;
+      }
+      .sectionHeadline {
+        border-bottom: 3px solid green;
+        font-size: larger;
+      }
+      .carousel {
+        width: 100%;
+        margin: 5% auto;
+        /* border: 2px solid blue; */
+      }
+      .slick-slide {
+        direction: ltr;
+        margin: 10px;
+        /* width: 200px; */
+        /* border: 2px solid red; */
+      }
+      .carousel .slick-slide {
+        /* width: 200px; */
+        /* height: 200px; */
+      }
+      .slick-slide img {
+        width: 100%;
+        /* border: blue solid 2px; */
+      }
+      .slick-prev:before {
+        color: green;
+        font-size: x-large;
+      }
+      .slick-next:before {
+        color: green;
+        font-size: x-large;
+      }
+    </style>
   </head>
   <body>
-    Account
+    <div id="wrapper">
+      <div class="container">
+        <div class="mainDiv">
+          <h2 class="accountHeadline">איזור אישי</h2>
+
+          <div class="hello">
+            שלום <%= firstName %>,
+            <small class="form-text "
+              ><a href="/edit" class="editDetailsBtn">עריכת פרטים</a></small
+            >
+          </div>
+
+          <div class="sectionHeadline">הכרטיסים שלך</div>
+
+          <div class="carousel">
+            <% if (cards.length === 0) { %> אין לך כרטיסים <% } else{ %> <%
+            cards.forEach(function(card) { %>
+            <div class="imgSlidePosition">
+              <a href="/cards/<%- card._id %>/edit">
+                <img class="" src="<%- card.finalCardPicUrl %>" width="800px"
+              /></a>
+            </div>
+
+            <% }) }%>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- BOOTSTRAP -->
+    <script
+      src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+      integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"
+      integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.rtlcss.com/bootstrap/v4.2.1/js/bootstrap.min.js"
+      integrity="sha384-a9xOd0rz8w0J8zqj1qJic7GPFfyMfoiuDjC9rqXlVOcGO/dmRqzMn34gZYDTel8k"
+      crossorigin="anonymous"
+    ></script>
+    <!-- Slick carousel -->
+    <script src="/javascript/slick.min.js"></script>
+    <script>
+      let picNum =
+        $(".imgSlidePosition").length <= 3
+          ? 0
+          : $(".imgSlidePosition").length + 9;
+
+      $(document).ready(function() {
+        $(".carousel").slick({
+          slidesToShow: 3,
+          infinite: true,
+          dots: true,
+          centerMode: true,
+          initialSlide: 0,
+          lazyLoad: "progressive" //ondemand
+          // variableWidth: true
+        });
+
+        for (let div of $(".imgSlidePosition")) {
+          div.style.transform = `translate(calc(${picNum} * 200px), 0)`;
+        }
+      });
+    </script>
   </body>
 </html>

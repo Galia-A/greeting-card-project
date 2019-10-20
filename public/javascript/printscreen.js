@@ -4,13 +4,7 @@ cardDiv.style.letterSpacing = "0.1px";
 document.querySelector("#captureBtn").addEventListener("click", () => {
   html2canvas(cardDiv, {
     useCORS: true,
-    allowTaint: true,
-    width: window.innerWidth,
-    height: window.innerHeight,
-    scrollX: window.pageXOffset,
-    scrollY: window.pageYOffset,
-    x: window.pageXOffset,
-    y: window.pageYOffset
+    allowTaint: true
   }).then(canvas => {
     //img url
     let imgUrl = canvas.toDataURL("image/png");
@@ -21,7 +15,7 @@ document.querySelector("#captureBtn").addEventListener("click", () => {
 
     //ajax send pic url
     $.ajax({
-      type: "POST",
+      type: "PUT",
       url: `/cards/${id}`,
       data: {
         imgUrl: imgUrl

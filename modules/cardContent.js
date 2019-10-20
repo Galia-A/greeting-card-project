@@ -7,11 +7,11 @@ const cardsData = require("./cardsData");
 //style guide
 let stylesContent = {
   classic: {
-    genderDescription: ["היקר", "היקרה"],
+    genderDescription: [" היקר", " היקרה"],
     cssStyles: ["border1"]
   },
   geek: {
-    genderDescription: ["השולט!!1", "השולטת!!1"],
+    genderDescription: [" השולט!!1", " השולטת!!1"],
     cssStyles: ["border1"]
   }
 };
@@ -34,14 +34,18 @@ let greetingContent = {
 let interestsGreetings = {
   general: [["שפע ברכות ואיחולים,", "בריאות, שמחה, אהבה והצלחה בכל התחומים"]],
   cats: [["שפע עכברים ומחילות", "שנהיה יחד בכל הלילות!"]],
-  dogs: [["שפע עכברים ומחילות", "שנהיה יחד בכל הלילות!"]]
+  dogs: [["שפע עכברים ומחילות", "שנהיה יחד בכל הלילות!"]],
+  travel: [["שפע ברכות ואיחולים,", " הרבה מסעות וטיולים"]],
+  dance: [["שפע ברכות ואיחולים,", " שתמיד תהיה סיבה לריקודים, עד 120!"]]
 };
 
 //pics urls
 let interestsPics = {
   general: ["/images/balloons.png"],
   cats: ["https://live.staticflickr.com/7475/16113593846_4b113741fc_b.jpg"],
-  dogs: ["https://live.staticflickr.com/7475/16113593846_4b113741fc_b.jpg"]
+  dogs: ["/images/balloons.png"],
+  travel: ["/images/balloons.png"],
+  dance: ["https://images-na.ssl-images-amazon.com/images/I/61FLNgtpMaL.jpg"]
 };
 
 function createCardContent(userCard, createNew = true, cardId) {
@@ -64,7 +68,7 @@ function createCardContent(userCard, createNew = true, cardId) {
     senderNameDescription
   );
   let picUrl = createPicUrl(interests);
-  let userId = mongoose.Types.ObjectId(); //getUserId();
+  let userId = userCard.user;
   let cssStyle = createCssStyle(style);
   let msg = createMsg(interests);
   let line1Description = msg[0];
@@ -86,7 +90,8 @@ function createCardContent(userCard, createNew = true, cardId) {
     cssStyle: cssStyle,
     line1Description: line1Description,
     line2Description: line2Description,
-    finalCardPicUrl: ""
+    finalCardPicUrl: "",
+    finalCardPicLocal: ""
   };
   if (createNew) {
     console.log("in create new card");
@@ -100,7 +105,7 @@ function validateInput(input) {
   return input.trim().length === 0 ? "" : input.trim();
 }
 function validateGender(input) {
-  return input.length === 0 ? "" : input;
+  return input ? input : "";
 }
 function validateStyle(input) {
   return input ? input : "classic";
@@ -115,8 +120,10 @@ function validateSigniture(input) {
   return input.length === 0 ? "malePlural" : input;
 }
 function createGenderDescription(name, gender, style) {
-  if (name.length === 0 || gender.length === 0) {
+  if (name.length === 0) {
     return "";
+  } else if (name.length !== 0 && gender.length === 0) {
+    return ",";
   } else {
     return (
       stylesContent[style].genderDescription[gender === "male" ? 0 : 1] + ","
