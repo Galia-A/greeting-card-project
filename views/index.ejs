@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <%- include("partials/head") %>
+    <!-- <link rel="stylesheet" href="/stylesheets/slick.css" />
+    <link rel="stylesheet" href="/stylesheets/slick-theme.css" /> -->
+    <style>
+      .mainDiv {
+        margin: auto auto;
+        padding: 30px;
+        transform: translate(0, 10%);
+        width: 1000px;
+        /* border: 3px solid rgb(106, 204, 111); */
+        border-radius: 5%;
+        position: relative;
+        /* display: flex;
+          justify-content: space-around; */
+      }
+      .accountHeadline {
+        margin-bottom: 5%;
+        text-align: center;
+      }
+      .hello {
+        font-size: xx-large;
+        margin-bottom: 10%;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div id="wrapper">
+      <div class="container">
+        <%- include("partials/navbar", {firstName: loggedUser ?
+        loggedUser.firstName : ""}) %>
+
+        <div class="mainDiv">
+          <h2 class="accountHeadline">מחולל הברכות</h2>
+
+          <div class="hello">
+            שלום
+          </div>
+          <h1>Greeting cards home page</h1>
+          <a href="./cards/new"><div>Create a new greeting card</div></a>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

@@ -1,28 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>Edit User</title>
-
-    <link
-      href="https://fonts.googleapis.com/css?family=Pacifico&display=swap"
-      rel="stylesheet"
-    />
-    <!-- <link rel="stylesheet" href="/stylesheets/showCard.css" /> -->
-    <link
-      rel="stylesheet"
-      href="https://cdn.rtlcss.com/bootstrap/v4.2.1/css/bootstrap.min.css"
-      integrity="sha384-vus3nQHTD+5mpDiZ4rkEPlnkcyTP+49BhJ4wJeJunw06ZAp+wzzeBPUXr42fi8If"
-      crossorigin="anonymous"
-    />
-    <link rel="stylesheet" href="/stylesheets/fonts.css" />
-    <link rel="stylesheet" href="/stylesheets/allSite.css" />
+    <%- include("partials/head") %>
     <style>
       .registerFormDiv {
         margin: auto auto;
-        padding: 30px;
+        margin-top: -30px;
+        padding: 20px;
         transform: translate(0, 10%);
         width: 800px;
         border: 3px solid rgb(106, 204, 111);
@@ -56,11 +40,16 @@
         background: transparent;
         color: #10c562;
       }
+      .navBarStyle {
+        background-color: rgb(106, 204, 111);
+      }
     </style>
   </head>
   <body>
     <div id="wrapper">
       <div class="container">
+        <%- include("partials/navbar", {firstName: firstName ? firstName : ""})
+        %>
         <div class="registerFormDiv">
           <h2 class="registerHeadline">איזור אישי - עדכון פרטים</h2>
 

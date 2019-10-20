@@ -1,12 +1,8 @@
-<% include partials/header %>
-  <title>New Card</title>
-  <link rel="stylesheet" href="/stylesheets/fonts.css">
-  <!-- <link rel="stylesheet" href="/stylesheets/showCard.css" /> -->
-  <link rel="stylesheet" href="https://cdn.rtlcss.com/bootstrap/v4.2.1/css/bootstrap.min.css" integrity="sha384-vus3nQHTD+5mpDiZ4rkEPlnkcyTP+49BhJ4wJeJunw06ZAp+wzzeBPUXr42fi8If" crossorigin="anonymous">
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+  <%- include("partials/head") %>
   <style>
-    body{
-      font-family: 'GveretLevin';
-    }
   .sketchDiv {
   margin: auto auto;
   padding: 20px;
@@ -19,11 +15,18 @@
   margin-bottom: 5%;
   text-align: center;
 }
+.navBarStyle {
+  background-color: rgb(101, 178, 197);
+}
+
   </style>
 </head>
 <body>
   <div id="wrapper">
     <div class="container">
+        <%- include("partials/navbar", {firstName: firstName}) %>
+
+
       <div class="sketchDiv">
 
         <h2 class="sketchHeadline"><%= headline %></h2>
@@ -57,13 +60,14 @@
               </div>
             </fieldset>
 
-            <div class="form-group row">
+            <div class="form-group form-row">
               <label class="col-sm-2 col-form-label offset-sm-3" for="eventType">מה האירוע? </label>
               <div class="col-sm-4">
               <select class="form-control" name="card[eventType]" id="eventType">
                 <option value="birthday" <% if (cardData.eventType === "birthday") { %> <%- "selected" %> <% } %>>יום הולדת</option>
                 <option value="endSchool" <% if (cardData.eventType === "endSchool") { %> <%- "selected" %> <% } %>>קבלת תואר</option>
                 <option value="anniversary" disabled <% if (cardData.eventType === "anniversary") { %> <%- "selected" %> <% } %>>יום נישואין</option>
+
               </select>
            </div>
 
@@ -129,10 +133,12 @@
               <label class="col-sm-2 col-form-label offset-sm-7" for="senderSignature">צורת חתימה </label>
               <div class="col-sm-3">
               <select class="form-control" name="card[senderSignature]" id="senderSignature">
-                <option value="malePlural" <% if (cardData.senderSignature === "malePlural") { %> <%- "selected" %> <% } %>>מאחלים</option>
-                <option value="femalePlural" <% if (cardData.senderSignature === "femalePlural") { %> <%- "selected" %> <% } %>>מאחלות</option>
-                <option value="maleSingle" <% if (cardData.senderSignature === "maleSingle") { %> <%- "selected" %> <% } %>>מאחל</option>
-                <option value="femaleSingle" <% if (cardData.senderSignature === "femaleSingle") { %> <%- "selected" %> <% } %>>מאחלת</option>
+                <% for (let sig in signatures) { %>
+                  <% if (cardData.senderSignature === sig) { %>
+                    <option value="<%- sig %>" selected><%- signatures[sig] %></option>
+                    <% } else { %>
+                      <option value="<%- sig %>"><%- signatures[sig] %></option>
+                  <% }} %>
               </select>
               </div>
             

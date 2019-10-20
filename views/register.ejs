@@ -1,44 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>Register</title>
-    <link rel="stylesheet" href="/stylesheets/fonts.css" />
-    <link rel="stylesheet" href="/stylesheets/allSite.css" />
-    <link
-      href="https://fonts.googleapis.com/css?family=Pacifico&display=swap"
-      rel="stylesheet"
-    />
-    <!-- <link rel="stylesheet" href="/stylesheets/showCard.css" /> -->
-    <link
-      rel="stylesheet"
-      href="https://cdn.rtlcss.com/bootstrap/v4.2.1/css/bootstrap.min.css"
-      integrity="sha384-vus3nQHTD+5mpDiZ4rkEPlnkcyTP+49BhJ4wJeJunw06ZAp+wzzeBPUXr42fi8If"
-      crossorigin="anonymous"
-    />
+    <%- include("partials/head") %>
     <style>
-      body {
-        font-family: "GveretLevin";
-      }
-      .handWriteFontEnglish {
-        font-family: "Pacifico", cursive;
-      }
       .registerFormDiv {
         margin: auto auto;
         padding: 30px;
-        transform: translate(0, 10%);
+        transform: translate(0, 5%);
         width: 800px;
-        border: 3px solid rgb(255, 136, 0);
+        border: 3px solid rgb(134, 23, 60);
         border-radius: 5%;
         position: relative;
-        /* display: flex;
-        justify-content: space-around; */
       }
       .registerHeadline {
-        margin-bottom: 5%;
-        /* text-align: center; */
+        margin-bottom: 10px;
         transform: translate(-33%, 0);
       }
       .btnEffect {
@@ -58,7 +33,7 @@
         background: transparent;
         color: #190042;
       }
-      img {
+      .registerFormDiv img {
         width: auto;
         height: auto;
         max-width: 200px;
@@ -67,11 +42,15 @@
         bottom: 5%;
         left: 4%;
       }
+      .navBarStyle {
+        background-color: rgb(207, 139, 162);
+      }
     </style>
   </head>
   <body>
     <div id="wrapper">
       <div class="container">
+        <%- include("partials/navbar", {firstName: ""}) %>
         <div class="registerFormDiv">
           <h2 class="registerHeadline">הרשמה</h2>
           <img src="/images/hello_dog.jpg" alt="hello" />

@@ -1,5 +1,6 @@
 .cardDiv {
   margin: auto auto;
+  margin-top: -15px;
   padding: 10px;
   transform: translate(0, 10%);
   display: flex;
@@ -33,10 +34,7 @@
   text-align: left;
   margin-top: 15%;
 }
-.imgStyle {
-  /* overflow: hidden; */
-}
-img {
+.cardDiv img {
   width: auto;
   height: auto;
   max-width: 450px;
@@ -44,7 +42,6 @@ img {
 }
 .btns {
   margin: 5% auto 0 auto;
-  /* border: 1px green solid; */
   text-align: center;
   width: 400px;
   display: flex;
@@ -52,7 +49,6 @@ img {
 }
 .instructions {
   display: block;
-  /* border: 1px green solid; */
   text-align: right;
   width: 800px;
   margin: 20px auto 0 auto;

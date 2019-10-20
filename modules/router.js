@@ -7,6 +7,13 @@ const userData = require("./userData");
 const User = userData.User;
 const passport = require("passport");
 
+const signatures = {
+  malePlural: "מאחלים",
+  femalePlural: "מאחלות",
+  maleSingle: "מאחל",
+  femaleSingle: "מאחלת"
+};
+
 function isLoggedIn(req, res, next) {
   if (req.isAuthenticated()) {
     next();
@@ -27,13 +34,15 @@ function router(app) {
     //  '/' home page
     .get("/", (req, res) => {
       let params = { loggedUser: req.user };
-      res.render("homepage.ejs", params);
+      res.render("index.ejs", params);
     })
     //create new card
     .get("/cards/new", isLoggedIn, (req, res) => {
       let params = {
         headline: "יצירת כרטיס ברכה חדש",
-        cardData: {}
+        cardData: {},
+        signatures: signatures,
+        firstName: req.user.firstName
       };
       res.render("newCard.ejs", params);
     })
@@ -52,7 +61,8 @@ function router(app) {
     //show generated card
     .get("/cards/:id", isLoggedIn, async (req, res) => {
       let params = {
-        cardData: await cardsData.getOneCard(req.params.id)
+        cardData: await cardsData.getOneCard(req.params.id),
+        firstName: req.user.firstName
       };
 
       res.render("showCard.ejs", params);
@@ -71,7 +81,9 @@ function router(app) {
       let params = {
         cardId: req.params.id,
         cardData: await cardsData.getOneCard(req.params.id),
-        headline: "עריכת כרטיס הברכה"
+        headline: "עריכת כרטיס הברכה",
+        firstName: req.user.firstName,
+        signatures: signatures
       };
       res.render("newCard.ejs", params);
     })
@@ -91,13 +103,17 @@ function router(app) {
     })
     //user register
     .get("/register", (req, res) => {
-      res.render("register", {
-        name: "",
-        message: "",
-        firstName: "",
-        lastName: "",
-        email: ""
-      });
+      if (req.isAuthenticated()) {
+        res.redirect("/");
+      } else {
+        res.render("register", {
+          name: "",
+          message: "",
+          firstName: "",
+          lastName: "",
+          email: ""
+        });
+      }
     })
     .post("/register", (req, res) => {
       //This is for DEV only!
@@ -126,7 +142,9 @@ function router(app) {
     .post("/edit", isLoggedIn, async (req, res) => {
       //This is for DEV only!
       //TODO - delete on deploy
-      req.body.isAdmin = req.body.adminCode === "9876";
+      if (req.body.adminCode) {
+        req.body.isAdmin = req.body.adminCode === "9876";
+      }
       //////////////////////////////////////////////////
       let user = await User.findByIdAndUpdate(req.user._id, {
         firstName: req.body.firstName,
@@ -143,7 +161,11 @@ function router(app) {
 
     //user login
     .get("/login", (req, res) => {
-      res.render("login");
+      if (req.isAuthenticated()) {
+        res.redirect("/");
+      } else {
+        res.render("login");
+      }
     })
     .post(
       "/login",

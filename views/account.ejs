@@ -1,24 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>Account</title>
-
-    <link
-      rel="stylesheet"
-      href="https://cdn.rtlcss.com/bootstrap/v4.2.1/css/bootstrap.min.css"
-      integrity="sha384-vus3nQHTD+5mpDiZ4rkEPlnkcyTP+49BhJ4wJeJunw06ZAp+wzzeBPUXr42fi8If"
-      crossorigin="anonymous"
-    />
-    <link rel="stylesheet" href="/stylesheets/fonts.css" />
-    <link
-      href="https://fonts.googleapis.com/css?family=Pacifico&display=swap"
-      rel="stylesheet"
-    />
-    <link rel="stylesheet" href="/stylesheets/allSite.css" />
-    <!-- <link rel="stylesheet" href="/stylesheets/showCard.css" /> -->
+    <%- include("partials/head") %>
     <link rel="stylesheet" href="/stylesheets/slick.css" />
     <link rel="stylesheet" href="/stylesheets/slick-theme.css" />
     <style>
@@ -30,16 +13,13 @@
         border: 3px solid rgb(106, 204, 111);
         border-radius: 5%;
         position: relative;
-        /* display: flex;
-          justify-content: space-around; */
       }
       .accountHeadline {
-        margin-bottom: 5%;
         text-align: center;
       }
       .hello {
         font-size: xx-large;
-        margin-bottom: 10%;
+        margin-bottom: 5%;
       }
       .editDetailsBtn {
         font-size: large;
@@ -63,10 +43,6 @@
         /* width: 200px; */
         /* border: 2px solid red; */
       }
-      .carousel .slick-slide {
-        /* width: 200px; */
-        /* height: 200px; */
-      }
       .slick-slide img {
         width: 100%;
         /* border: blue solid 2px; */
@@ -79,11 +55,15 @@
         color: green;
         font-size: x-large;
       }
+      .navBarStyle {
+        background-color: rgb(106, 204, 111);
+      }
     </style>
   </head>
   <body>
     <div id="wrapper">
       <div class="container">
+        <%- include("partials/navbar", {firstName: firstName}) %>
         <div class="mainDiv">
           <h2 class="accountHeadline">איזור אישי</h2>
 

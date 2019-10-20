@@ -1,13 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <link rel="stylesheet" href="/stylesheets/allSite.css" />
-
-    <!-- <% include partials/header %> -->
-    <title>My Card</title>
+    <%- include("partials/head") %>
     <link rel="stylesheet" href="/stylesheets/showCard.css" />
     <style>
       .btnEffect {
@@ -26,11 +20,16 @@
         background: transparent;
         color: #190042;
       }
+      .navBarStyle {
+        background-color: #b698e6;
+      }
     </style>
   </head>
   <body>
     <div id="wrapper">
       <div class="container">
+        <%- include("partials/navbar", {firstName: firstName}) %>
+
         <div class="cardDiv  <%- cardData.cssStyle %>">
           <div class="text1">
             <div class="firstLine">
