@@ -52,6 +52,14 @@ function router(app) {
       };
       res.render("index.ejs", params);
     })
+    //  about page
+    .get("/about", (req, res) => {
+      let params = {
+        loggedUser: req.user,
+        isAdmin: req.user ? req.user.isAdmin : false
+      };
+      res.render("about", params);
+    })
     //create new card
     .get("/cards/new", isLoggedIn, (req, res) => {
       let params = {

@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <%- include("partials/head") %>
+    <style>
+      .mainDiv {
+        margin: auto auto;
+        padding: 30px;
+        transform: translate(0, 10%);
+        width: 1000px;
+        border-radius: 5%;
+      }
+      .homepageHeadline {
+        /* margin-bottom: 5%; */
+        text-align: center;
+        font-size: xx-large;
+      }
+      .homepageContent {
+        font-size: large;
+        text-align: center;
+        /* margin-bottom: 10%; */
+      }
+      .jumbotron {
+        background-color: transparent;
+        margin-top: -100px;
+      }
+      .btn {
+        background-color: #faa12c;
+      }
+      .homepageImg {
+        width: 300px;
+        position: absolute;
+        left: 0;
+        top: -10px;
+        z-index: -10;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div id="wrapper">
+      <div class="container">
+        <%- include("partials/navbar", {firstName: loggedUser ?
+        loggedUser.firstName : ""}) %>
+
+        <div class="mainDiv">
+          <!-- <img class="homepageImg" src="/images/balloons_6.png" alt="" /> -->
+          <div class="jumbotron ">
+            <h1 class="display-4">אודות</h1>
+            <p class="lead">
+              הרעיון לפרויקט שכב אצלי במגירה כבר שנים... הוא נולד בימי פייסבוק
+              הראשונים, כשכפתור
+              <span class="handWriteFontEnglish"> "See friendship" </span>
+              הופיע ואפשר לי לראות את היסטוריית הברכות שכתבנו אחד לשני.
+              <br />
+              האפשרות הזו הוסיפה רובד נוסטלגי, כשכל שנה בדקתי מה השתנה ומה עשינו
+              יחד, אבל גם אפשרה לי להשוות ולראות שכבר איחלתי את ה-כ-ל.
+              <br />
+              האתר הזה הוא הפתרון שלי, להכין ברכה אישית וחמודה!
+            </p>
+
+            <hr class="my-4" />
+            <h1 class="display-4">קצת עלי</h1>
+
+            <p class="lead">
+              אני גליה, באר-שבעית כבר שנתיים.
+              <br />
+              בעברי הרחוק - מפתחת פלאש.
+              <br />
+              בעברי הקרוב - מדריכה ומפתחת הדרכה ללימוד תכנות בעמותת תפוח.
+              <br />
+              ובעתידי - מפתחת
+              <span class="handWriteFontEnglish"> Full Stack. </span>
+            </p>
+            <p class="lead">
+              האתר הוכן במסגרת קורס פיתוח אתרים במכללת
+              <span class="handWriteFontEnglish">INT </span>
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
