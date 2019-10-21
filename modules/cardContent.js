@@ -8,11 +8,11 @@ const cardsData = require("./cardsData");
 let stylesContent = {
   classic: {
     genderDescription: [" היקר", " היקרה"],
-    cssStyles: ["border1"]
+    cssStyles: ["border1 text1"]
   },
   geek: {
     genderDescription: [" השולט!!1", " השולטת!!1"],
-    cssStyles: ["border1"]
+    cssStyles: ["border2 text2"]
   }
 };
 
@@ -27,25 +27,69 @@ let signitureContent = {
 //event greetings
 let greetingContent = {
   birthday: ["מזל טוב!", "מזל טוב ליום הולדתך!", "יום הולדת שמח!"],
-  degree: ["כל הכבוד!", "שיחקת אותה!", "יאללה לדוקטורט!"]
+  degree: ["כל הכבוד!", "שיחקת אותה!", "יאללה לדוקטורט!"],
+  anniversary: ["מזל טוב לרגל האירוסין!", "נתראה בחתונה!", "מזל טוב!"],
+  newyear: ["שנה טובה!", "יאללה מחדש!", "שנה טובה ומתוקה!"]
 };
 
 //interests greetings
 let interestsGreetings = {
-  general: [["שפע ברכות ואיחולים,", "בריאות, שמחה, אהבה והצלחה בכל התחומים"]],
-  cats: [["שפע עכברים ומחילות", "שנהיה יחד בכל הלילות!"]],
-  dogs: [["שפע עכברים ומחילות", "שנהיה יחד בכל הלילות!"]],
-  travel: [["שפע ברכות ואיחולים,", " הרבה מסעות וטיולים"]],
-  dance: [["שפע ברכות ואיחולים,", " שתמיד תהיה סיבה לריקודים, עד 120!"]]
+  general: [
+    ["שפע ברכות ואיחולים,", "בריאות, שמחה, אהבה והצלחה בכל התחומים"],
+    ["שתהיה שנה קסומה ומקסימה!", "מלאת הרפתקאות, ניסים ונפלאות!"],
+    ["שתהיה שנה של הגשמת משאלות!", "מלאה באנשים מחייכים ובעניים נוצצות!"]
+  ],
+  cats: [
+    ["שפע עכברים ומחילות", "שנהיה יחד בכל הלילות!"],
+    ["שימיך יהיו מלאים בנוצות ועכברים", "ולילותיך מלאים בכרבולים"],
+    ["שתמיד יהיה ציד מלהיב בסביבה", "ושלא יכלול ציפור במיטה..."]
+  ],
+  dogs: [
+    ["שפע כרבולים ונביחות", "בכל הימים ובכל הלילות!"],
+    ["שפע ליקוקים, טריקים וחטיפים", "שימיך יהיו מלאים טיולים ארוכים"]
+  ],
+  travel: [
+    ["שפע ברכות ואיחולים,", "הרבה מסעות וטיולים!"],
+    ["שפע טרקים, מסעות וטיולים", "מלאים בכיף, חברים וסיפורים!"]
+  ],
+  dance: [
+    ["שפע ברכות ואיחולים,", "שתמיד תהיה סיבה לריקודים!"],
+    ["שכל צעד וטאפ יהיו מושלמים!", "שכולם יראו ממה סופרסטארים עשויים!"],
+    ["שתהיה שנה מלאה בשמחות!", "הופעות ומחיאות כפיים סוערות!"]
+  ],
+  lowbattery: [["שפע שטרות שוכבים בספה", "וטלפונים מהסוג האחרון שיצא!"]]
 };
 
 //pics urls
 let interestsPics = {
-  general: ["/images/balloons.png"],
-  cats: ["https://live.staticflickr.com/7475/16113593846_4b113741fc_b.jpg"],
-  dogs: ["/images/balloons.png"],
-  travel: ["/images/balloons.png"],
-  dance: ["https://images-na.ssl-images-amazon.com/images/I/61FLNgtpMaL.jpg"]
+  general: ["/images/cards/balloons.png"],
+  cats: [
+    "/images/cards/cat_butterfly.jpg",
+    "/images/cards/cat_note.jpg",
+    "/images/cards/cat_flowers.jpg",
+    "/images/cards/cat_box.jpg"
+  ],
+  dogs: [
+    "/images/cards/balloons.png",
+    "/images/cards/dog_returns.jpg",
+    "/images/cards/dog_flower.jpg",
+    "/images/cards/dog_love.jpg"
+  ],
+  travel: [
+    "/images/cards/balloons.png",
+    "/images/cards/travel_mountain.jpg",
+    "/images/cards/travel_bag.jpg",
+    "/images/cards/travel_rocks.jpeg"
+  ],
+  dance: [
+    "https://images-na.ssl-images-amazon.com/images/I/61FLNgtpMaL.jpg",
+    "/images/cards/dance_wishes.jpg",
+    "/images/cards/dance_dark1.png",
+    "/images/cards/dance_dark2.png",
+    "/images/cards/dance_dark3.jpg",
+    "/images/cards/dance_irish.jpg"
+  ],
+  lowbattery: ["/images/cards/lowBattery2.png"]
 };
 
 function createCardContent(userCard, createNew = true, cardId) {

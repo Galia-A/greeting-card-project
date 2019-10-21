@@ -8,7 +8,10 @@
   width: 800px;
 }
 .border1 {
-  border: 8px double rgb(70, 1, 70);
+  border: 5px solid rgb(70, 1, 70);
+}
+.border2 {
+  border: 8px solid rgb(4, 182, 226);
 }
 .text1 {
   font-family: "Times New Roman", Times, serif;
@@ -16,20 +19,26 @@
   line-height: 2;
   width: 400px;
 }
-.text1 .firstLine {
+.text2 {
+  font-family: "Tinos", serif;
+  font-size: 24px;
+  line-height: 2;
+  /* width: 400px; */
+}
+.firstLine {
   font-weight: bold;
   text-align: right;
   margin-bottom: 5%;
 }
-.text1 .eventMsg {
+.eventMsg {
   text-align: center;
   margin-bottom: 10%;
   font-size: larger;
 }
-.text1 .msg {
+.msg {
   text-align: center;
 }
-.text1 .lastLine {
+.lastLine {
   font-weight: bold;
   text-align: left;
   margin-top: 15%;

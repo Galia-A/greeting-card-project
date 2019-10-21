@@ -82,7 +82,7 @@ function router(app) {
           userData.addCard(req.user._id, card._id);
           res.redirect(`/cards/${card._id}`);
         })
-        .catch(err => console.log(`There was an error: `));
+        .catch(err => console.log(`There was an error: ${err}`));
     })
     //show generated card
     .get("/cards/:id", [isLoggedIn, ownsCard], async (req, res) => {
@@ -129,7 +129,7 @@ function router(app) {
           console.log("EDIT SUCCESSFUL!");
           res.redirect(`/cards/${card._id}`);
         })
-        .catch(err => console.log(`There was an error in update`));
+        .catch(err => console.log(`There was an error in update: ${err}`));
     })
     //user register
     .get("/register", (req, res) => {
