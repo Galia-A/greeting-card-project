@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <%- include("partials/head") %>
+    <style>
+      .mainDiv {
+        margin: auto auto;
+        padding: 30px;
+        transform: translate(0, 10%);
+        width: 1000px;
+        border-radius: 5%;
+      }
+      .homepageHeadline {
+        margin-bottom: 5%;
+        text-align: center;
+        font-size: xx-large;
+      }
+      .homepageContent {
+        font-size: large;
+        text-align: center;
+        margin-bottom: 10%;
+      }
+      .jumbotron {
+        background-color: transparent;
+        margin-top: 60px;
+      }
+      .btn {
+        background-color: #faa12c;
+      }
+      .homepageImg {
+        width: 300px;
+        position: absolute;
+        left: 0;
+        top: -10px;
+        z-index: -10;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div id="wrapper">
+      <div class="container">
+        <%- include("partials/navbar", {firstName: loggedUser ?
+        loggedUser.firstName : ""}) %>
+
+        <div class="mainDiv">
+          <img
+            class="homepageImg"
+            src="/images/cat404.png"
+            alt="searching cat"
+          />
+          <div class="jumbotron ">
+            <h1 class="display-4">אופס...</h1>
+            <p class="lead">
+              העמוד שחיפשת לא קיים
+            </p>
+            <hr class="my-4" />
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

@@ -47,6 +47,15 @@ app.use(methodOverride("_method"));
 const router = require("./modules/router.js");
 router(app);
 
+//404
+app.use((req, res) => {
+  let params = {
+    loggedUser: req.user,
+    isAdmin: req.user ? req.user.isAdmin : false
+  };
+  res.status(404).render("notFound", params);
+});
+
 app.listen(3000, () => {
   console.log("The server is listening to port 3000");
 });

@@ -1,5 +1,5 @@
 //data
-const fs = require("fs");
+// const fs = require("fs");
 const cardsData = require("./cardsData");
 const cardContent = require("./cardContent");
 // const userData = require('./userData');
@@ -26,6 +26,19 @@ function isAdmin(req, res, next) {
     next();
   } else {
     res.status(403).redirect("/");
+  }
+}
+async function ownsCard(req, res, next) {
+  try {
+    let card = await cardsData.getOneCard(req.params.id);
+    if (card.user._id.equals(req.user._id)) {
+      next();
+    } else {
+      res.status(403).redirect("/");
+    }
+  } catch (err) {
+    console.log(err);
+    res.status(404).send(err.toString());
   }
 }
 
@@ -63,7 +76,7 @@ function router(app) {
         .catch(err => console.log(`There was an error: `));
     })
     //show generated card
-    .get("/cards/:id", isLoggedIn, async (req, res) => {
+    .get("/cards/:id", [isLoggedIn, ownsCard], async (req, res) => {
       let params = {
         cardData: await cardsData.getOneCard(req.params.id),
         firstName: req.user.firstName,
@@ -72,17 +85,18 @@ function router(app) {
 
       res.render("showCard.ejs", params);
     })
-    .put("/cards/:id", isLoggedIn, async (req, res) => {
-      let data = req.body.imgUrl.replace(/^data:image\/png;base64,/, "");
-      let imgUrl = `/userImages/${req.params.id}.png`;
-      fs.writeFileSync(`public/${imgUrl}`, data, {
-        encoding: "base64"
-      });
-      cardsData.updateFinalImgUrl(req.params.id, req.body.imgUrl, imgUrl);
+    .put("/cards/:id", [isLoggedIn, ownsCard], async (req, res) => {
+      // let data = req.body.imgUrl.replace(/^data:image\/png;base64,/, "");
+      // let imgUrl = `/userImages/${req.params.id}.png`;
+      // fs.writeFileSync(`public/${imgUrl}`, data, {
+      //   encoding: "base64"
+      // });
+      // cardsData.updateFinalImgUrl(req.params.id, req.body.imgUrl, imgUrl);
+      cardsData.updateFinalImgUrl(req.params.id, req.body.imgUrl);
       userData.addCard(req.user._id, req.params.id);
     })
     //edit card
-    .get("/cards/:id/edit", isLoggedIn, async (req, res) => {
+    .get("/cards/:id/edit", [isLoggedIn, ownsCard], async (req, res) => {
       let params = {
         cardId: req.params.id,
         cardData: await cardsData.getOneCard(req.params.id),
@@ -95,7 +109,7 @@ function router(app) {
     })
 
     //edit existing card
-    .post("/cards/:id/edit", isLoggedIn, async (req, res) => {
+    .post("/cards/:id/edit", [isLoggedIn, ownsCard], async (req, res) => {
       let cardId = req.params.id;
       let card = req.body.card;
       //update db
@@ -149,8 +163,10 @@ function router(app) {
     .post("/edit", isLoggedIn, async (req, res) => {
       //This is for DEV only!
       //TODO - delete on deploy
-      if (req.body.adminCode) {
+      if (!req.user.isAdmin) {
         req.body.isAdmin = req.body.adminCode === "9876";
+      } else {
+        req.body.isAdmin = req.user.isAdmin;
       }
       //////////////////////////////////////////////////
       let user = await User.findByIdAndUpdate(req.user._id, {
@@ -192,8 +208,6 @@ function router(app) {
       let user = await User.findById(req.user._id)
         .populate("cards")
         .exec();
-      // console.log("user", user.cards[0].cssStyle);
-
       res.render("account", user);
     })
     //admin page

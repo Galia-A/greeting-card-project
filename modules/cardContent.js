@@ -62,7 +62,7 @@ function createCardContent(userCard, createNew = true, cardId) {
   let eventDescription = createEventDescription(eventType);
   let interests = validateInterests(userCard.interests);
   let senderNameDescription = validateInput(userCard.senderName);
-  let senderSignature = validateSigniture(userCard.senderSignature);
+  let senderSignature = validateSignature(userCard.senderSignature);
   let senderSignatureDescription = createSigniture(
     senderSignature,
     senderNameDescription
@@ -90,8 +90,7 @@ function createCardContent(userCard, createNew = true, cardId) {
     cssStyle: cssStyle,
     line1Description: line1Description,
     line2Description: line2Description,
-    finalCardPicUrl: "",
-    finalCardPicLocal: ""
+    finalCardPicUrl: ""
   };
   if (createNew) {
     console.log("in create new card");
@@ -116,7 +115,7 @@ function validateEventType(input) {
 function validateInterests(input) {
   return input ? input : "general";
 }
-function validateSigniture(input) {
+function validateSignature(input) {
   return input.length === 0 ? "malePlural" : input;
 }
 function createGenderDescription(name, gender, style) {
