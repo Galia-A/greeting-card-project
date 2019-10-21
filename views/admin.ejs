@@ -21,18 +21,232 @@
         text-align: center;
         margin-bottom: 10%;
       }
+      .mainDiv {
+        margin: auto auto;
+        padding: 30px;
+        transform: translate(0, 10%);
+        width: 1000px;
+        border: 3px solid rgb(106, 204, 111);
+        border-radius: 5%;
+        position: relative;
+      }
+      .accountHeadline {
+        text-align: center;
+      }
+      .hello {
+        font-size: xx-large;
+        margin-bottom: 5%;
+      }
+      .editDetailsBtn {
+        font-size: large;
+        color: rgb(137, 190, 150);
+      }
+      .editDetailsBtn:hover {
+        color: #10c562;
+      }
+      .sectionHeadline {
+        border-bottom: 3px solid green;
+        font-size: larger;
+      }
       .navBarStyle {
         background-color: rgb(150, 235, 195);
+      }
+      .users {
+        /* border: 1px black solid; */
+        display: flex;
+        flex-flow: row wrap;
+        justify-content: space-around;
+        align-items: flex-start;
+        margin: 10px;
+        margin-bottom: 5%;
+      }
+      .oneUser {
+        width: 40%;
+        border: 3px solid green;
+        border-radius: 5%;
+        margin: 10px;
+        padding: 15px;
+      }
+      .userNameHeadLine {
+        font-size: x-large;
+        text-decoration-line: underline;
+        margin-bottom: 15px;
+      }
+      .formStyle {
+        margin-right: 5%;
+        /* border: red solid 2px; */
+      }
+      .btnEffect {
+        color: #fefefe;
+        background: green;
+        -webkit-transition: none;
+        -moz-transition: none;
+        transition: none;
+        border: 4px solid green;
+        text-align: center;
+        border-radius: 20%;
+        width: 90px;
+        height: 35px;
+        margin-top: 5%;
+        margin-right: 10%;
+      }
+      .btnEffect:hover {
+        background: transparent;
+        color: green;
       }
     </style>
   </head>
   <body>
+    <!-- Modal -->
+    <div
+      class="modal fade"
+      id="myModal"
+      tabindex="-1"
+      role="dialog"
+      aria-labelledby="exampleModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">
+              העדכון בוצע בהצלחה
+            </h5>
+            <button
+              type="button"
+              class="close"
+              data-dismiss="modal"
+              aria-label="Close"
+            >
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <div id="wrapper">
       <div class="container">
         <%- include("partials/navbar", {firstName: firstName}) %>
+        <div class="mainDiv">
+          <h2 class="accountHeadline">איזור ניהול</h2>
 
-        <div class="mainDiv"></div>
+          <div class="hello">
+            שלום <%= firstName %>,
+          </div>
+
+          <div class="sectionHeadline">עדכון משתתפים</div>
+
+          <div class="users">
+            <% usersDB.forEach(function(user){ %> <% if
+            (!user._id.equals(adminId)) { %>
+
+            <div class="oneUser">
+              <!-- user Name -->
+              <div class="col-sm-5 handWriteFontEnglish userNameHeadLine">
+                <%= user.username %>
+              </div>
+              <!-- full name -->
+              <div class="col-sm-5">
+                <%= user.firstName %> <%= user.lastName %>
+              </div>
+              <!-- email -->
+              <div class="col-sm-5 handWriteFontEnglish">
+                <%= user.email %>
+              </div>
+              <form
+                id="editUserForm-<%- user._id %>"
+                action="/admin/edit"
+                method="POST"
+                class="formStyle"
+              >
+                <input type="hidden" name="userId" value="<%- user._id %>" />
+
+                <!-- is admin -->
+                <div class="form-group form-check-inline">
+                  <% if (user.isAdmin) { %>
+                  <input
+                    type="checkbox"
+                    class="form-check-input"
+                    id="isAdmin"
+                    name="isAdmin"
+                    checked
+                  />
+                  <% } else { %>
+                  <input
+                    type="checkbox"
+                    class="form-check-input"
+                    id="isAdmin"
+                    name="isAdmin"
+                  />
+                  <% } %>
+                  <label class="form-check-label" for="isAdmin">מנהל/ת</label>
+                </div>
+
+                <!-- is active -->
+                <div class="form-group form-check-inline">
+                  <% if (user.isActive) { %>
+                  <input
+                    type="checkbox"
+                    class="form-check-input"
+                    id="isActive"
+                    name="isActive"
+                    checked
+                  />
+                  <% } else { %>
+                  <input
+                    type="checkbox"
+                    class="form-check-input"
+                    id="isActive"
+                    name="isActive"
+                  />
+                  <% } %>
+                  <label class="form-check-label" for="isActive">פעיל/ה</label>
+                </div>
+                <button type="submit" class="btnEffect">
+                  עדכון
+                </button>
+              </form>
+            </div>
+            <% }}) %>
+            <!-- end loop -->
+          </div>
+        </div>
       </div>
     </div>
+    <!-- BOOTSTRAP -->
+    <script
+      src="https://code.jquery.com/jquery-3.4.1.min.js"
+      integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"
+      integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.rtlcss.com/bootstrap/v4.2.1/js/bootstrap.min.js"
+      integrity="sha384-a9xOd0rz8w0J8zqj1qJic7GPFfyMfoiuDjC9rqXlVOcGO/dmRqzMn34gZYDTel8k"
+      crossorigin="anonymous"
+    ></script>
+
+    <% usersDB.forEach(function (user) { %>
+    <script>
+      $(document).ready(function() {
+        $("#editUserForm-<%- user._id %>").submit(function() {
+          $.ajax({
+            type: "POST",
+            url: "/admin/edit",
+            data: $("#editUserForm-<%- user._id %>").serialize(),
+            success: function() {
+              $("#myModal").modal("show");
+            }
+          });
+          return false;
+        });
+      });
+    </script>
+    <% }) %>
   </body>
 </html>

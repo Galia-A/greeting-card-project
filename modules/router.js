@@ -215,9 +215,32 @@ function router(app) {
       res.render("account", user);
     })
     //admin page
-    .get("/admin", isAdmin, (req, res) => {
-      params = { firstName: req.user.firstName, isAdmin: req.user.isAdmin };
+    .get("/admin", isAdmin, async (req, res) => {
+      let usersDB = await User.find({});
+
+      params = {
+        adminId: req.user._id,
+        firstName: req.user.firstName,
+        isAdmin: req.user.isAdmin,
+        usersDB: usersDB
+      };
       res.render("admin", params);
+    })
+    .post("/admin/edit", isAdmin, async (req, res) => {
+      let user = await User.findById(req.body.userId);
+      if (req.body.isAdmin) {
+        user.isAdmin = true;
+      } else {
+        user.isAdmin = false;
+      }
+      if (req.body.isActive) {
+        user.isActive = true;
+      } else {
+        user.isActive = false;
+      }
+      await user.save();
+
+      res.redirect("/admin");
     });
 }
 
