@@ -2,8 +2,6 @@
 <html lang="en">
   <head>
     <%- include("partials/head") %>
-    <!-- <link rel="stylesheet" href="/stylesheets/slick.css" />
-    <link rel="stylesheet" href="/stylesheets/slick-theme.css" /> -->
     <style>
       .mainDiv {
         margin: auto auto;
@@ -53,9 +51,13 @@
               המקום ליצירת כרטיסי ברכה מושקעים בקלות!
             </p>
             <hr class="my-4" />
+            <% if (!loggedUser) { %>
             <a class="btn btn-lg" href="/register" role="button"
               >הצטרפו עכשיו!</a
             >
+            <% } else { %>
+            <a class="btn btn-lg" href="/cards/new" role="button">צרו ברכה!</a>
+            <% } %>
           </div>
         </div>
       </div>

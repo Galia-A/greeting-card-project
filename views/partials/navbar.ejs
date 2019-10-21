@@ -33,9 +33,11 @@
       <% } else{ %>
       <a class="nav-item nav-link " href="/cards/new">ברכה חדשה</a>
       <a class="nav-item nav-link " href="/account">איזור אישי</a>
-      <a class="nav-item nav-link disabled" href="/admin">איזור ניהול</a>
+      <% if (isAdmin) { %>
+      <a class="nav-item nav-link" href="/admin">איזור ניהול</a>
+      <% } %>
       <a class="nav-item nav-link" href="/logout">התנתקות</a>
-      <% }%>
+      <% } %>
     </div>
   </div>
 </nav>

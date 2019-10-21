@@ -33,7 +33,10 @@ function router(app) {
   app
     //  '/' home page
     .get("/", (req, res) => {
-      let params = { loggedUser: req.user };
+      let params = {
+        loggedUser: req.user,
+        isAdmin: req.user ? req.user.isAdmin : false
+      };
       res.render("index.ejs", params);
     })
     //create new card
@@ -42,7 +45,8 @@ function router(app) {
         headline: "יצירת כרטיס ברכה חדש",
         cardData: {},
         signatures: signatures,
-        firstName: req.user.firstName
+        firstName: req.user.firstName,
+        isAdmin: req.user.isAdmin
       };
       res.render("newCard.ejs", params);
     })
@@ -62,7 +66,8 @@ function router(app) {
     .get("/cards/:id", isLoggedIn, async (req, res) => {
       let params = {
         cardData: await cardsData.getOneCard(req.params.id),
-        firstName: req.user.firstName
+        firstName: req.user.firstName,
+        isAdmin: req.user.isAdmin
       };
 
       res.render("showCard.ejs", params);
@@ -83,6 +88,7 @@ function router(app) {
         cardData: await cardsData.getOneCard(req.params.id),
         headline: "עריכת כרטיס הברכה",
         firstName: req.user.firstName,
+        isAdmin: req.user.isAdmin,
         signatures: signatures
       };
       res.render("newCard.ejs", params);
@@ -137,7 +143,8 @@ function router(app) {
     })
     //edit user details
     .get("/edit", isLoggedIn, (req, res) => {
-      res.render("editUser", req.user);
+      let params = { ...req.user._doc, isAdmin: req.user.isAdmin };
+      res.render("editUser", params);
     })
     .post("/edit", isLoggedIn, async (req, res) => {
       //This is for DEV only!
@@ -170,7 +177,7 @@ function router(app) {
     .post(
       "/login",
       passport.authenticate("local", {
-        successRedirect: "/account",
+        successRedirect: "/",
         failureRedirect: "/login"
       }),
       () => {}
@@ -191,7 +198,8 @@ function router(app) {
     })
     //admin page
     .get("/admin", isAdmin, (req, res) => {
-      res.render("admin");
+      params = { firstName: req.user.firstName, isAdmin: req.user.isAdmin };
+      res.render("admin", params);
     });
 }
 

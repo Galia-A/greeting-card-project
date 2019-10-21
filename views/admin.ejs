@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <%- include("partials/head") %>
+    <style>
+      .mainDiv {
+        margin: auto auto;
+        padding: 30px;
+        transform: translate(0, 10%);
+        width: 1000px;
+        border-radius: 5%;
+        border: 3px solid rgb(84, 214, 153);
+      }
+      .homepageHeadline {
+        margin-bottom: 5%;
+        text-align: center;
+        font-size: xx-large;
+      }
+      .homepageContent {
+        font-size: large;
+        text-align: center;
+        margin-bottom: 10%;
+      }
+      .navBarStyle {
+        background-color: rgb(150, 235, 195);
+      }
+    </style>
+  </head>
+  <body>
+    <div id="wrapper">
+      <div class="container">
+        <%- include("partials/navbar", {firstName: firstName}) %>
+
+        <div class="mainDiv"></div>
+      </div>
+    </div>
+  </body>
+</html>
