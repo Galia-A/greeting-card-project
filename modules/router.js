@@ -66,11 +66,12 @@ function router(app) {
 
     //add data to DB & create the card
     .post("/cards", isLoggedIn, (req, res) => {
-      let card = req.body.card;
-      card.user = req.user._id;
+      let cardForm = req.body.card;
+      cardForm.user = req.user._id;
       cardContent
-        .createCardContent(card)
+        .createCardContent(cardForm)
         .then(card => {
+          userData.addCard(req.user._id, card._id);
           res.redirect(`/cards/${card._id}`);
         })
         .catch(err => console.log(`There was an error: `));
@@ -112,6 +113,7 @@ function router(app) {
     .post("/cards/:id/edit", [isLoggedIn, ownsCard], async (req, res) => {
       let cardId = req.params.id;
       let card = req.body.card;
+      card.user = req.user._id;
       //update db
       cardContent
         .createCardContent(card, false, cardId)

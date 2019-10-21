@@ -1,7 +1,8 @@
 //converts card to a canvas img
 let cardDiv = document.querySelector(".cardDiv");
 cardDiv.style.letterSpacing = "0.1px";
-document.querySelector("#captureBtn").addEventListener("click", () => {
+
+$(document).ready(() => {
   html2canvas(cardDiv, {
     useCORS: true,
     allowTaint: true
@@ -11,7 +12,6 @@ document.querySelector("#captureBtn").addEventListener("click", () => {
 
     //get url id
     let id = window.location.pathname.split("/").slice(-1)[0];
-    window.open(imgUrl, "_blank");
 
     //ajax send pic url
     $.ajax({
@@ -21,5 +21,18 @@ document.querySelector("#captureBtn").addEventListener("click", () => {
         imgUrl: imgUrl
       }
     });
+  });
+});
+
+document.querySelector("#captureBtn").addEventListener("click", () => {
+  html2canvas(cardDiv, {
+    useCORS: true,
+    allowTaint: true
+  }).then(canvas => {
+    //img url
+    let imgUrl = canvas.toDataURL("image/png");
+
+    //open new window
+    window.open(imgUrl, "_blank");
   });
 });
