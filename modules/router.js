@@ -15,7 +15,7 @@ const signatures = {
 };
 
 function isLoggedIn(req, res, next) {
-  if (req.isAuthenticated()) {
+  if (req.isAuthenticated() && req.user.isActive) {
     next();
   } else {
     res.redirect("/login");
@@ -186,7 +186,7 @@ function router(app) {
 
     //user login
     .get("/login", (req, res) => {
-      if (req.isAuthenticated()) {
+      if (req.isAuthenticated() && req.user.isActive) {
         res.redirect("/");
       } else {
         res.render("login");
@@ -194,11 +194,13 @@ function router(app) {
     })
     .post(
       "/login",
-      passport.authenticate("local", {
-        successRedirect: "/",
-        failureRedirect: "/login"
-      }),
-      () => {}
+      passport.authenticate("local", { failureRedirect: "/" }),
+      (req, res) => {
+        if (!req.user.isActive) {
+          req.logout();
+        }
+        res.redirect("/");
+      }
     )
     //user logout
     .get("/logout", (req, res) => {
