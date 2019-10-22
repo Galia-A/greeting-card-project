@@ -6,6 +6,7 @@ const session = require("express-session");
 const app = express();
 //passport
 const passport = require("passport");
+const flash = require("connect-flash");
 const LocalStrategy = require("passport-local");
 const userData = require("./modules/userData");
 const User = userData.User;
@@ -38,6 +39,7 @@ app.use(
   express.static(path.join(__dirname, "/node_modules/slick-carousel/slick"))
 );
 app.use(bodyParser.urlencoded({ limit: "50mb", extended: true }));
+app.use(flash());
 
 //REST
 const methodOverride = require("method-override");

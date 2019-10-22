@@ -1,8 +1,6 @@
 //data
-// const fs = require("fs");
 const cardsData = require("./cardsData");
 const cardContent = require("./cardContent");
-// const userData = require('./userData');
 const userData = require("./userData");
 const User = userData.User;
 const passport = require("passport");
@@ -197,17 +195,25 @@ function router(app) {
       if (req.isAuthenticated() && req.user.isActive) {
         res.redirect("/");
       } else {
-        res.render("login");
+        res.render("login", {
+          message: req.flash("error")
+        });
       }
     })
     .post(
       "/login",
-      passport.authenticate("local", { failureRedirect: "/" }),
+      passport.authenticate("local", {
+        failureRedirect: "/login",
+        failureFlash: "שם משתמש או סיסמה לא תקינים"
+      }),
       (req, res) => {
         if (!req.user.isActive) {
           req.logout();
+          req.flash("error", "המשתמש לא פעיל");
+          res.redirect("/login");
+        } else {
+          res.redirect("/");
         }
-        res.redirect("/");
       }
     )
     //user logout

@@ -10,6 +10,9 @@
         <%- include("partials/navbar", {firstName: ""}) %>
         <div class="mainDiv loginFormDiv">
           <h2 class="pageHeadline">התחברות</h2>
+          <% if (message) { %>
+          <h5 class="text-danger"><%= message %></h5>
+          <% } %>
           <img src="/images/hello_dog_pink.jpg" alt="hello" />
 
           <form action="/login" method="post">
