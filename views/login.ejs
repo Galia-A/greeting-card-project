@@ -2,70 +2,14 @@
 <html lang="en">
   <head>
     <%- include("partials/head") %>
-    <style>
-      body {
-        font-family: "GveretLevin";
-      }
-      .handWriteFontEnglish {
-        font-family: "Pacifico", cursive;
-      }
-      .registerFormDiv {
-        margin: auto auto;
-        padding: 30px;
-        transform: translate(0, 10%);
-        width: 800px;
-        border: 3px solid rgb(255, 136, 0);
-        border-radius: 5%;
-        position: relative;
-        /* display: flex;
-          justify-content: space-around; */
-      }
-      .registerHeadline {
-        margin-bottom: 5%;
-        /* text-align: center; */
-        transform: translate(-33%, 0);
-      }
-      .btnEffect {
-        color: #fefefe;
-        background: #190042;
-        -webkit-transition: none;
-        -moz-transition: none;
-        transition: none;
-        border: 4px solid #190042;
-        text-align: center;
-        border-radius: 60px;
-        width: 100px;
-        padding: 5px;
-        margin-top: 5%;
-      }
-      .btnEffect:hover {
-        background: transparent;
-        color: #190042;
-      }
-      .LoginFormDiv img {
-        width: auto;
-        height: auto;
-        max-width: 200px;
-        max-height: 200px;
-        position: absolute;
-        bottom: 5%;
-        left: 4%;
-      }
-      .LoginFormDiv {
-        border: 3px solid rgb(255, 0, 128);
-        border-radius: 15%;
-      }
-      .navBarStyle {
-        background-color: rgb(245, 158, 201);
-      }
-    </style>
+    <link rel="stylesheet" href="/stylesheets/login.css" />
   </head>
   <body>
     <div id="wrapper">
       <div class="container">
         <%- include("partials/navbar", {firstName: ""}) %>
-        <div class="registerFormDiv LoginFormDiv">
-          <h2 class="registerHeadline">התחברות</h2>
+        <div class="mainDiv loginFormDiv">
+          <h2 class="pageHeadline">התחברות</h2>
           <img src="/images/hello_dog_pink.jpg" alt="hello" />
 
           <form action="/login" method="post">

@@ -2,24 +2,7 @@
 <html lang="en">
   <head>
   <%- include("partials/head") %>
-  <style>
-  .sketchDiv {
-  margin: auto auto;
-  padding: 20px;
-  transform: translate(0, 10%);
-  width: 800px;
-  border: 3px solid rgb(0, 204, 255);
-  border-radius: 5%;
-}
-.sketchHeadline{
-  margin-bottom: 5%;
-  text-align: center;
-}
-.navBarStyle {
-  background-color: rgb(101, 178, 197);
-}
-
-  </style>
+  <link rel="stylesheet" href="/stylesheets/newCard.css" />
 </head>
 <body>
   <div id="wrapper">
@@ -27,7 +10,7 @@
         <%- include("partials/navbar", {firstName: firstName}) %>
 
 
-      <div class="sketchDiv">
+      <div class="mainDiv sketchDiv">
 
         <h2 class="sketchHeadline"><%= headline %></h2>
         

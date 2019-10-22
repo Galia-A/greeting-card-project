@@ -2,58 +2,16 @@
 <html lang="en">
   <head>
     <%- include("partials/head") %>
-    <style>
-      .registerFormDiv {
-        margin: auto auto;
-        padding: 30px;
-        transform: translate(0, 5%);
-        width: 800px;
-        border: 3px solid rgb(134, 23, 60);
-        border-radius: 5%;
-        position: relative;
-      }
-      .registerHeadline {
-        margin-bottom: 10px;
-        transform: translate(-33%, 0);
-      }
-      .btnEffect {
-        color: #fefefe;
-        background: #190042;
-        -webkit-transition: none;
-        -moz-transition: none;
-        transition: none;
-        border: 4px solid #190042;
-        text-align: center;
-        border-radius: 60px;
-        width: 100px;
-        padding: 5px;
-        margin-top: 5%;
-      }
-      .btnEffect:hover {
-        background: transparent;
-        color: #190042;
-      }
-      .registerFormDiv img {
-        width: auto;
-        height: auto;
-        max-width: 200px;
-        max-height: 200px;
-        position: absolute;
-        bottom: 5%;
-        left: 4%;
-      }
-      .navBarStyle {
-        background-color: rgb(207, 139, 162);
-      }
-    </style>
+    <link rel="stylesheet" href="/stylesheets/register.css" />
   </head>
   <body>
     <div id="wrapper">
       <div class="container">
         <%- include("partials/navbar", {firstName: ""}) %>
-        <div class="registerFormDiv">
-          <h2 class="registerHeadline">הרשמה</h2>
+        <div class="mainDiv registerFormDiv">
+          <h2 class="pageHeadline">הרשמה</h2>
           <img src="/images/hello_dog.jpg" alt="hello" />
+
           <form action="/register" method="post">
             <!-- first name -->
             <div class="form-group form-row">

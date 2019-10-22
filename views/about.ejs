@@ -2,35 +2,7 @@
 <html lang="en">
   <head>
     <%- include("partials/head") %>
-    <style>
-      .mainDiv {
-        margin: auto auto;
-        padding-left: 30px;
-        padding-right: 30px;
-        transform: translate(0, 10%);
-        width: 1000px;
-        border-radius: 5%;
-      }
-      .homepageHeadline {
-        /* margin-bottom: 5%; */
-        text-align: center;
-        font-size: xx-large;
-      }
-      .homepageContent {
-        font-size: large;
-        text-align: center;
-        /* margin-bottom: 10%; */
-      }
-      .jumbotron {
-        background-color: transparent;
-        /* margin-top: -100px; */
-        padding-bottom: 5px;
-        padding-top: 5px;
-      }
-      .btn {
-        background-color: #faa12c;
-      }
-    </style>
+    <link rel="stylesheet" href="/stylesheets/informationPages.css" />
   </head>
 
   <body>
@@ -39,8 +11,8 @@
         <%- include("partials/navbar", {firstName: loggedUser ?
         loggedUser.firstName : ""}) %>
 
-        <div class="mainDiv">
-          <div class="jumbotron ">
+        <div class="mainDiv aboutDiv">
+          <div class="jumbotron">
             <h1 class="display-4">אודות</h1>
             <p class="lead">
               הרעיון לפרויקט שכב אצלי במגירה כבר שנים... הוא נולד בימי פייסבוק

@@ -4,67 +4,13 @@
     <%- include("partials/head") %>
     <link rel="stylesheet" href="/stylesheets/slick.css" />
     <link rel="stylesheet" href="/stylesheets/slick-theme.css" />
-    <style>
-      .mainDiv {
-        margin: auto auto;
-        padding: 30px;
-        transform: translate(0, 10%);
-        width: 1000px;
-        border: 3px solid rgb(106, 204, 111);
-        border-radius: 5%;
-        position: relative;
-      }
-      .accountHeadline {
-        text-align: center;
-      }
-      .hello {
-        font-size: xx-large;
-        margin-bottom: 5%;
-      }
-      .editDetailsBtn {
-        font-size: large;
-        color: rgb(137, 190, 150);
-      }
-      .editDetailsBtn:hover {
-        color: #10c562;
-      }
-      .sectionHeadline {
-        border-bottom: 3px solid green;
-        font-size: larger;
-      }
-      .carousel {
-        width: 100%;
-        margin: 5% auto;
-        /* border: 2px solid blue; */
-      }
-      .slick-slide {
-        direction: ltr;
-        margin: 10px;
-        /* width: 200px; */
-        /* border: 2px solid red; */
-      }
-      .slick-slide img {
-        width: 100%;
-        /* border: blue solid 2px; */
-      }
-      .slick-prev:before {
-        color: green;
-        font-size: x-large;
-      }
-      .slick-next:before {
-        color: green;
-        font-size: x-large;
-      }
-      .navBarStyle {
-        background-color: rgb(106, 204, 111);
-      }
-    </style>
+    <link rel="stylesheet" href="/stylesheets/privatePages.css" />
   </head>
   <body>
     <div id="wrapper">
-      <div class="container">
+      <div class="container accountPage">
         <%- include("partials/navbar", {firstName: firstName}) %>
-        <div class="mainDiv">
+        <div class="mainDiv accountDiv">
           <h2 class="accountHeadline">איזור אישי</h2>
 
           <div class="hello">

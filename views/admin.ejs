@@ -2,99 +2,7 @@
 <html lang="en">
   <head>
     <%- include("partials/head") %>
-    <style>
-      .mainDiv {
-        margin: auto auto;
-        padding: 30px;
-        transform: translate(0, 10%);
-        width: 1000px;
-        border-radius: 5%;
-        border: 3px solid rgb(84, 214, 153);
-      }
-      .homepageHeadline {
-        margin-bottom: 5%;
-        text-align: center;
-        font-size: xx-large;
-      }
-      .homepageContent {
-        font-size: large;
-        text-align: center;
-        margin-bottom: 10%;
-      }
-      .mainDiv {
-        margin: auto auto;
-        padding: 30px;
-        transform: translate(0, 10%);
-        width: 1000px;
-        border: 3px solid rgb(106, 204, 111);
-        border-radius: 5%;
-        position: relative;
-      }
-      .accountHeadline {
-        text-align: center;
-      }
-      .hello {
-        font-size: xx-large;
-        margin-bottom: 5%;
-      }
-      .editDetailsBtn {
-        font-size: large;
-        color: rgb(137, 190, 150);
-      }
-      .editDetailsBtn:hover {
-        color: #10c562;
-      }
-      .sectionHeadline {
-        border-bottom: 3px solid green;
-        font-size: larger;
-      }
-      .navBarStyle {
-        background-color: rgb(150, 235, 195);
-      }
-      .users {
-        /* border: 1px black solid; */
-        display: flex;
-        flex-flow: row wrap;
-        justify-content: space-around;
-        align-items: flex-start;
-        margin: 10px;
-        margin-bottom: 5%;
-      }
-      .oneUser {
-        width: 40%;
-        border: 3px solid green;
-        border-radius: 5%;
-        margin: 10px;
-        padding: 15px;
-      }
-      .userNameHeadLine {
-        font-size: x-large;
-        text-decoration-line: underline;
-        margin-bottom: 15px;
-      }
-      .formStyle {
-        margin-right: 5%;
-        /* border: red solid 2px; */
-      }
-      .btnEffect {
-        color: #fefefe;
-        background: green;
-        -webkit-transition: none;
-        -moz-transition: none;
-        transition: none;
-        border: 4px solid green;
-        text-align: center;
-        border-radius: 20%;
-        width: 90px;
-        height: 35px;
-        margin-top: 5%;
-        margin-right: 10%;
-      }
-      .btnEffect:hover {
-        background: transparent;
-        color: green;
-      }
-    </style>
+    <link rel="stylesheet" href="/stylesheets/privatePages.css" />
   </head>
   <body>
     <!-- Modal -->
@@ -124,11 +32,11 @@
         </div>
       </div>
     </div>
-
+    <!-- End Modal -->
     <div id="wrapper">
-      <div class="container">
+      <div class="container adminPage">
         <%- include("partials/navbar", {firstName: firstName}) %>
-        <div class="mainDiv">
+        <div class="mainDiv adminDiv">
           <h2 class="accountHeadline">איזור ניהול</h2>
 
           <div class="hello">
@@ -215,6 +123,7 @@
       </div>
     </div>
     <%- include("partials/footer") %> <% usersDB.forEach(function (user) { %>
+    <!-- Modal controller -->
     <script>
       $(document).ready(function() {
         $("#editUserForm-<%- user._id %>").submit(function() {
