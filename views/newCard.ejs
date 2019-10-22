@@ -67,7 +67,7 @@
                 <option value="birthday" <% if (cardData.eventType === "birthday") { %> <%- "selected" %> <% } %>>יום הולדת</option>
                 <option value="degree" <% if (cardData.eventType === "degree") { %> <%- "selected" %> <% } %>>קבלת תואר</option>
                 <option value="newyear" <% if (cardData.eventType === "newyear") { %> <%- "selected" %> <% } %>>שנה חדשה</option>
-                <option value="anniversary" disabled <% if (cardData.eventType === "anniversary") { %> <%- "selected" %> <% } %>>יום נישואין</option>
+                <option value="anniversary" <% if (cardData.eventType === "anniversary") { %> <%- "selected" %> <% } %>>יום נישואין</option>
 
               </select>
            </div>
@@ -109,6 +109,12 @@
                         <input class="form-check-input" type="radio" name="card[interests]" id="interestsDance" value="dance" <% if (cardData.interests === "dance") { %> <%- "checked" %> <% } %>>
                         <label class="form-check-label" for="interestsDance">
                           ריקודים
+                        </label>
+                      </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="card[interests]" id="interestsPodcast" value="lowbattery" <% if (cardData.interests === "lowbattery") { %> <%- "checked" %> <% } %>>
+                        <label class="form-check-label handWriteFontEnglish" for="interestsPodcast">
+                          Low-Battery
                         </label>
                       </div>
 
@@ -170,9 +176,6 @@
       </div>
     </div>
   </div>
-  <!-- BOOTSTRAP -->
-  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
-  <script src="https://cdn.rtlcss.com/bootstrap/v4.2.1/js/bootstrap.min.js" integrity="sha384-a9xOd0rz8w0J8zqj1qJic7GPFfyMfoiuDjC9rqXlVOcGO/dmRqzMn34gZYDTel8k" crossorigin="anonymous"></script>
+  <%- include("partials/footer") %>
 </body>
 </html>

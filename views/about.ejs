@@ -5,7 +5,8 @@
     <style>
       .mainDiv {
         margin: auto auto;
-        padding: 30px;
+        padding-left: 30px;
+        padding-right: 30px;
         transform: translate(0, 10%);
         width: 1000px;
         border-radius: 5%;
@@ -22,17 +23,12 @@
       }
       .jumbotron {
         background-color: transparent;
-        margin-top: -100px;
+        /* margin-top: -100px; */
+        padding-bottom: 5px;
+        padding-top: 5px;
       }
       .btn {
         background-color: #faa12c;
-      }
-      .homepageImg {
-        width: 300px;
-        position: absolute;
-        left: 0;
-        top: -10px;
-        z-index: -10;
       }
     </style>
   </head>
@@ -44,7 +40,6 @@
         loggedUser.firstName : ""}) %>
 
         <div class="mainDiv">
-          <!-- <img class="homepageImg" src="/images/balloons_6.png" alt="" /> -->
           <div class="jumbotron ">
             <h1 class="display-4">אודות</h1>
             <p class="lead">
@@ -80,5 +75,6 @@
         </div>
       </div>
     </div>
+    <%- include("partials/footer") %>
   </body>
 </html>
