@@ -1,4 +1,5 @@
 //data
+const axios = require("axios");
 const cardsData = require("./cardsData");
 const cardContent = require("./cardContent");
 const userData = require("./userData");
@@ -128,6 +129,30 @@ function router(app) {
           res.redirect(`/cards/${card._id}`);
         })
         .catch(err => console.log(`There was an error in update: ${err}`));
+    })
+    // upload saved card to imgur
+    .post("/link", isLoggedIn, async (req, res) => {
+      const { base64img, cardId } = req.body;
+      try {
+        let result = await axios.post(
+          "https://api.imgur.com/3/upload",
+          {
+            image: base64img
+          },
+          {
+            headers: {
+              Authorization: `Client-ID ${process.env.IMGUR_CLIENT_ID}`
+            }
+          }
+        );
+        let url = result.data.data.link;
+        cardsData.updateImgurUrl(cardId, url);
+        res.json({
+          link: url
+        });
+      } catch (error) {
+        res.status(error.response.status).send(error.response.statusText);
+      }
     })
     //user register
     .get("/register", (req, res) => {

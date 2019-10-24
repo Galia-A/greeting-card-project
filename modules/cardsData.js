@@ -22,7 +22,8 @@ let cardSchema = new mongoose.Schema({
   },
   line1Description: String,
   line2Description: String,
-  finalCardPicUrl: String
+  finalCardPicUrl: String,
+  finalCardImgurUrl: String
   // finalCardPicLocal: String
 });
 let Card = mongoose.model("Card", cardSchema);
@@ -55,6 +56,22 @@ function updateFinalImgUrl(cardId, url) {
   );
 }
 
+function updateImgurUrl(cardId, url) {
+  Card.findByIdAndUpdate(
+    cardId,
+    {
+      finalCardImgurUrl: url
+    },
+    (err, card) => {
+      if (err) {
+        console.log("update final imgur url error: ", err);
+      } else {
+        console.log("update final imgur url success! ");
+      }
+    }
+  );
+}
+
 function editCard(cardId, editedCard) {
   return Card.findByIdAndUpdate(cardId, editedCard);
 }
@@ -63,5 +80,6 @@ module.exports = {
   getOneCard: getOneCard,
   addNewCard: addNewCard,
   updateFinalImgUrl: updateFinalImgUrl,
-  editCard: editCard
+  editCard: editCard,
+  updateImgurUrl: updateImgurUrl
 };
