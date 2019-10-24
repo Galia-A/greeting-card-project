@@ -23,7 +23,7 @@ let cardSchema = new mongoose.Schema({
   line1Description: String,
   line2Description: String,
   finalCardImgurUrl: String,
-  imgurDeleteHash: String,
+  imgurDeleteHash: [String],
   finalCardPicUrl: String
   // finalCardPicLocal: String
 });
@@ -57,21 +57,11 @@ function updateFinalImgUrl(cardId, url) {
   );
 }
 
-function updateImgurUrl(cardId, url, deleteHash) {
-  Card.findByIdAndUpdate(
-    cardId,
-    {
-      finalCardImgurUrl: url,
-      imgurDeleteHash: deleteHash
-    },
-    (err, card) => {
-      if (err) {
-        console.log("update final imgur url error: ", err);
-      } else {
-        console.log("update final imgur url success! ");
-      }
-    }
-  );
+async function updateImgurUrl(cardId, url, deleteHash) {
+  let card = await Card.findById(cardId);
+  card.finalCardImgurUrl = url;
+  card.imgurDeleteHash.push(deleteHash);
+  await card.save();
 }
 
 function editCard(cardId, editedCard) {
