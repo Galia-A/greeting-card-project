@@ -146,7 +146,8 @@ function router(app) {
           }
         );
         let url = result.data.data.link;
-        cardsData.updateImgurUrl(cardId, url);
+        let deleteHash = result.data.data.deletehash;
+        cardsData.updateImgurUrl(cardId, url, deleteHash);
         res.json({
           link: url
         });

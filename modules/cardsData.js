@@ -22,8 +22,9 @@ let cardSchema = new mongoose.Schema({
   },
   line1Description: String,
   line2Description: String,
-  finalCardPicUrl: String,
-  finalCardImgurUrl: String
+  finalCardImgurUrl: String,
+  imgurDeleteHash: String,
+  finalCardPicUrl: String
   // finalCardPicLocal: String
 });
 let Card = mongoose.model("Card", cardSchema);
@@ -56,11 +57,12 @@ function updateFinalImgUrl(cardId, url) {
   );
 }
 
-function updateImgurUrl(cardId, url) {
+function updateImgurUrl(cardId, url, deleteHash) {
   Card.findByIdAndUpdate(
     cardId,
     {
-      finalCardImgurUrl: url
+      finalCardImgurUrl: url,
+      imgurDeleteHash: deleteHash
     },
     (err, card) => {
       if (err) {
