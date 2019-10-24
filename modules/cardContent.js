@@ -70,13 +70,11 @@ let interestsPics = {
     "/images/cards/cat_box.jpg"
   ],
   dogs: [
-    "/images/cards/balloons.png",
     "/images/cards/dog_returns.jpg",
     "/images/cards/dog_flower.jpg",
     "/images/cards/dog_love.jpg"
   ],
   travel: [
-    "/images/cards/balloons.png",
     "/images/cards/travel_mountain.jpg",
     "/images/cards/travel_bag.jpg",
     "/images/cards/travel_rocks.jpeg"
