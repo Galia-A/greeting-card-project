@@ -6,12 +6,12 @@
   </head>
   <body>
     <script>
-      window.fbAsyncInit = function() {
+      window.fbAsyncInit = function () {
         FB.init({
           appId: "782528815534043",
           autoLogAppEvents: true,
           xfbml: true,
-          version: "v4.0"
+          version: "v4.0",
         });
       };
     </script>
@@ -24,7 +24,7 @@
       <div class="container">
         <%- include("partials/navbar", {firstName: firstName}) %>
 
-        <div class="cardDiv  <%- cardData.cssStyle.split(' ')[0] %>">
+        <div class="cardDiv <%- cardData.cssStyle.split(' ')[0] %>">
           <div class="<%- cardData.cssStyle.split(' ')[1] %>">
             <div class="firstLine">
               <%= cardData.recipientDescription %><%= cardData.genderDescription
@@ -42,23 +42,24 @@
             </div>
           </div>
           <div class="imgStyle">
-            <img src= <%= cardData.picUrl %> alt= <%= cardData.eventType %> />
+            <img src="<%" ="cardData.picUrl" % /> alt= <%= cardData.eventType %>
+            />
           </div>
         </div>
         <div class="btns">
-          <button class="btnEffect" id="captureBtn">
+          <!-- <button class="btnEffect" id="captureBtn">
             הצגת תמונה
-          </button>
+          </button> -->
           <button class="btnEffect" id="editBtn">עריכה</button>
-          <button class="btnEffect" id="uploadBtn" disabled>
+          <!-- <button class="btnEffect" id="uploadBtn" disabled>
             שיתוף בפייסבוק
-          </button>
+          </button> -->
         </div>
-        <div id="imgurLink"></div>
-        <div class="instructions">
+        <!-- <div id="imgurLink"></div> -->
+        <!-- <div class="instructions">
           * לחיצה על כפתור הצגת תמונה תפתח חלון חדש בו עליכם ללחוץ על לחצן ימני
           ו'שמירה כתמונה'
-        </div>
+        </div> -->
       </div>
     </div>
     <%- include("partials/footer") %>
