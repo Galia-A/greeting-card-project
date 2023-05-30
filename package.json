@@ -6,9 +6,6 @@
   "scripts": {
     "start": "node app.js"
   },
-  "engines": {
-    "node": "12.x"
-  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Galia-A/greeting-card-project.git"
